@@ -651,3 +651,629 @@ These two equations form the mathematical foundation of all modern deep learning
 ✔ The perceptron can solve only linearly separable problems.
 
 ✔ The Multi-Layer Perceptron was developed to overcome these limitations.
+
+
+
+# Multi-Layer Perceptron (MLP) Notation
+*(Based on the notation used in the class notes)*
+
+---
+
+# Introduction
+
+In a Multi-Layer Perceptron (MLP), every layer, neuron, weight, bias, and output is represented using mathematical notation.
+
+Understanding this notation is very important because the same symbols are used later in:
+
+- Forward Propagation
+- Backpropagation
+- Gradient Descent
+- Deep Learning algorithms
+
+The notation below follows the convention used in the class notes.
+
+---
+
+# Layer Numbering
+
+The network is divided into multiple layers.
+
+```text
+L₀ → Input Layer
+
+L₁ → Hidden Layer 1
+
+L₂ → Hidden Layer 2
+
+L₃ → Output Layer
+```
+
+Notice that the **Input Layer is numbered as Layer 0**.
+
+| Layer | Meaning |
+|--------|---------|
+| L₀ | Input Layer |
+| L₁ | Hidden Layer 1 |
+| L₂ | Hidden Layer 2 |
+| L₃ | Output Layer |
+
+---
+
+# Network Architecture
+
+Example network used in the notes
+
+```text
+               Layer 0             Layer 1             Layer 2             Layer 3
+
+Input         Hidden Layer 1      Hidden Layer 2      Output Layer
+
+x₁
+x₂  ─────────► ○ ○ ○ ─────────► ○ ○ ─────────► ○
+x₃
+x₄
+```
+
+The network consists of
+
+- 4 Input Neurons
+- 3 Hidden Neurons (Layer 1)
+- 2 Hidden Neurons (Layer 2)
+- 1 Output Neuron
+
+---
+
+# 1. Input Notation
+
+The input is represented as
+
+\[
+x_{ij}
+\]
+
+where
+
+- **x** = Input
+- **i** = Training Example (Sample Number)
+- **j** = Feature Number
+
+---
+
+## Meaning
+
+Suppose
+
+Student 5 has
+
+| Feature | Value |
+|----------|------:|
+| CGPA | 8.2 |
+| IQ | 120 |
+| Projects | 4 |
+| Coding Score | 90 |
+
+Then
+
+```text
+x₅₁ = 8.2
+
+x₅₂ = 120
+
+x₅₃ = 4
+
+x₅₄ = 90
+```
+
+Meaning
+
+- Sample Number = 5
+- Feature Number = 1,2,3,4
+
+---
+
+## General Representation
+
+\[
+x_{ij}
+\]
+
+means
+
+> Feature **j** of Training Example **i**.
+
+---
+
+# 2. Weight Notation
+
+Weights are represented as
+
+\[
+w_{ij}^{k}
+\]
+
+This notation contains three indices.
+
+---
+
+## Meaning of Each Index
+
+### Superscript
+
+\[
+k
+\]
+
+represents
+
+**Layer Number**
+
+Example
+
+- \(w^1\) → Weights connecting Layer 0 to Layer 1
+- \(w^2\) → Weights connecting Layer 1 to Layer 2
+- \(w^3\) → Weights connecting Layer 2 to Layer 3
+
+---
+
+### First Subscript
+
+\[
+i
+\]
+
+represents
+
+**Source Node (Current Layer)**
+
+---
+
+### Second Subscript
+
+\[
+j
+\]
+
+represents
+
+**Destination Node (Next Layer)**
+
+---
+
+## General Meaning
+
+\[
+w_{ij}^{k}
+\]
+
+means
+
+> Weight connecting
+
+Node **i**
+
+↓
+
+Node **j**
+
+in Layer **k**
+
+---
+
+# Examples
+
+---
+
+## Example 1
+
+\[
+w_{12}^{1}
+\]
+
+Meaning
+
+```text
+Layer 1
+
+Input Node 1
+
+↓
+
+Hidden Layer 1
+
+Neuron 2
+```
+
+---
+
+## Example 2
+
+\[
+w_{43}^{1}
+\]
+
+Meaning
+
+```text
+Layer 1
+
+Input Node 4
+
+↓
+
+Hidden Layer 1
+
+Neuron 3
+```
+
+---
+
+## Example 3
+
+\[
+w_{21}^{2}
+\]
+
+Meaning
+
+```text
+Layer 2
+
+Hidden Layer 1
+
+Neuron 2
+
+↓
+
+Hidden Layer 2
+
+Neuron 1
+```
+
+---
+
+## Example 4
+
+\[
+w_{12}^{2}
+\]
+
+Meaning
+
+```text
+Layer 2
+
+Hidden Layer 1
+
+Neuron 1
+
+↓
+
+Hidden Layer 2
+
+Neuron 2
+```
+
+---
+
+## Example 5
+
+\[
+w_{21}^{3}
+\]
+
+Meaning
+
+```text
+Layer 3
+
+Hidden Layer 2
+
+Neuron 2
+
+↓
+
+Output Neuron
+```
+
+---
+
+# Why is the Superscript Necessary?
+
+Suppose we simply write
+
+\[
+w_{12}
+\]
+
+Which connection is this?
+
+- Input → Hidden Layer 1 ?
+- Hidden Layer 1 → Hidden Layer 2 ?
+- Hidden Layer 2 → Output Layer ?
+
+Impossible to identify.
+
+Therefore,
+
+the superscript indicates **which layer of weights**.
+
+---
+
+# 3. Bias Notation
+
+Bias is represented as
+
+\[
+b_{ij}
+\]
+
+where
+
+- **i** = Layer Number
+- **j** = Neuron Number
+
+Each neuron has **one bias**.
+
+Weights belong to **connections**.
+
+Bias belongs to **neurons**.
+
+---
+
+## Example
+
+### Hidden Layer 1
+
+Biases
+
+\[
+b_{11},\;
+b_{12},\;
+b_{13}
+\]
+
+Meaning
+
+```text
+Layer 1
+
+Neuron 1
+
+Neuron 2
+
+Neuron 3
+```
+
+---
+
+### Hidden Layer 2
+
+Biases
+
+\[
+b_{21},\;
+b_{22}
+\]
+
+Meaning
+
+```text
+Layer 2
+
+Neuron 1
+
+Neuron 2
+```
+
+---
+
+### Output Layer
+
+Bias
+
+\[
+b_{31}
+\]
+
+Meaning
+
+```text
+Layer 3
+
+Output Neuron
+```
+
+---
+
+# Why Does Every Neuron Need a Bias?
+
+Weights determine
+
+> **How important is each input?**
+
+Bias determines
+
+> **How much should the decision boundary shift?**
+
+Each neuron therefore requires exactly **one bias**.
+
+---
+
+# 4. Output Notation
+
+Output is represented as
+
+\[
+o_{ij}
+\]
+
+where
+
+- **i** = Layer Number
+- **j** = Neuron Number
+
+This follows exactly the same indexing convention as the bias notation.
+
+---
+
+## Hidden Layer 1 Outputs
+
+\[
+o_{11},\;
+o_{12},\;
+o_{13}
+\]
+
+Meaning
+
+Outputs of
+
+- Hidden Neuron 1
+- Hidden Neuron 2
+- Hidden Neuron 3
+
+---
+
+## Hidden Layer 2 Outputs
+
+\[
+o_{21},\;
+o_{22}
+\]
+
+Meaning
+
+Outputs of
+
+- Hidden Neuron 1
+- Hidden Neuron 2
+
+---
+
+## Output Layer
+
+\[
+o_{31}
+\]
+
+Meaning
+
+Output produced by the final output neuron.
+
+In prediction problems,
+
+this is the network's final prediction.
+
+---
+
+# Complete Flow of Information
+
+```text
+Input Layer (L₀)
+
+x
+
+↓
+
+Weights (w¹)
+
+↓
+
+Hidden Layer 1
+
+↓
+
+Outputs (o₁₁,o₁₂,o₁₃)
+
+↓
+
+Weights (w²)
+
+↓
+
+Hidden Layer 2
+
+↓
+
+Outputs (o₂₁,o₂₂)
+
+↓
+
+Weights (w³)
+
+↓
+
+Output Layer
+
+↓
+
+o₃₁
+```
+
+---
+
+# Relationship Between Symbols
+
+```text
+Input
+
+↓
+
+x
+
+↓
+
+Weight
+
+↓
+
+w
+
+↓
+
+Bias
+
+↓
+
+b
+
+↓
+
+Neuron Computation
+
+↓
+
+Output
+
+↓
+
+o
+```
+
+---
+
+# Summary Table
+
+| Symbol | Meaning |
+|----------|---------|
+| \(L_0\) | Input Layer |
+| \(L_1\) | Hidden Layer 1 |
+| \(L_2\) | Hidden Layer 2 |
+| \(L_3\) | Output Layer |
+| \(x_{ij}\) | Feature **j** of Training Sample **i** |
+| \(w_{ij}^{k}\) | Weight connecting Node **i** to Node **j** in Layer **k** |
+| \(b_{ij}\) | Bias of Neuron **j** in Layer **i** |
+| \(o_{ij}\) | Output of Neuron **j** in Layer **i** |
+
+---
+
+# Important Points to Remember
+
+- Layers are numbered starting from **0**.
+- Every **connection** has one **weight**.
+- Every **neuron** has one **bias**.
+- Every **neuron** produces one **output**.
+- The superscript in the weight notation identifies **which layer of connections**.
+- The first subscript identifies the **source node**.
+- The second subscript identifies the **destination node**.
+- This notation is used throughout **Forward Propagation**, **Backpropagation**, and the remaining Deep Learning topics.
