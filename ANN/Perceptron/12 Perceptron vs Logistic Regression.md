@@ -71,9 +71,9 @@ Both algorithms
 
 Mathematical model
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 Both algorithms compute exactly the same weighted sum.
 
@@ -91,13 +91,13 @@ Uses
 Step Function
 ```
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,&z\ge0\\
 0,&z<0
 \end{cases}
-\]
+$$
 
 Output
 
@@ -119,9 +119,9 @@ Uses the
 Sigmoid Function
 ```
 
-\[
+$$
 \sigma(z)=\frac{1}{1+e^{-z}}
-\]
+$$
 
 Output
 
@@ -279,9 +279,9 @@ Student B is much more confidently classified.
 
 Uses
 
-\[
+$$
 w=w+\eta(y-\hat y)x
-\]
+$$
 
 Weights change only after incorrect predictions.
 
@@ -291,9 +291,9 @@ Weights change only after incorrect predictions.
 
 Uses Gradient Descent
 
-\[
+$$
 w=w-\eta\frac{\partial L}{\partial w}
-\]
+$$
 
 The model continuously minimizes the loss.
 
@@ -305,9 +305,9 @@ The model continuously minimizes the loss.
 
 Uses only the prediction error
 
-\[
+$$
 y-\hat y
-\]
+$$
 
 ---
 
@@ -353,9 +353,9 @@ An interesting fact
 
 Both models learn
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 Therefore,
 
@@ -551,9 +551,9 @@ The Perceptron and Logistic Regression are both binary classifiers.
 
 Both compute the same weighted sum,
 
-\[
+$$
 w^Tx+b
-\]
+$$
 
 However,
 
@@ -575,9 +575,9 @@ making it much more suitable for modern Machine Learning.
 
 ✔ Both compute
 
-\[
+$$
 w^Tx+b
-\]
+$$
 
 ✔ Perceptron uses the Step Function.
 
@@ -617,9 +617,9 @@ Yes.
 
 Both learn linear decision boundaries of the form
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 ---
 

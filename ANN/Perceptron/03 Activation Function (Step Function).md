@@ -24,9 +24,9 @@ After completing this chapter, you will be able to:
 
 In Chapter 2, we learned that the Perceptron computes a weighted sum.
 
-\[
+$$
 z = \sum_{i=1}^{n} w_i x_i + b
-\]
+$$
 
 The weighted sum **z** is only a numerical score.
 
@@ -139,13 +139,13 @@ The original Perceptron uses the **Step Function**.
 
 It is defined as
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,& z \ge 0\\
 0,& z < 0
 \end{cases}
-\]
+$$
 
 This is the activation function used in the original Perceptron. :contentReference[oaicite:1]{index=1}
 
@@ -293,17 +293,17 @@ b = -2
 
 Compute the weighted sum
 
-\[
+$$
 z = 4(2)+(-1)(5)-2
-\]
+$$
 
-\[
+$$
 =8-5-2
-\]
+$$
 
-\[
+$$
 =1
-\]
+$$
 
 ### Step 2
 
@@ -343,17 +343,17 @@ b = -8
 
 Weighted Sum
 
-\[
+$$
 z = 2(1)+1(2)-8
-\]
+$$
 
-\[
+$$
 =4-8
-\]
+$$
 
-\[
+$$
 =-4
-\]
+$$
 
 Apply Step Function
 
@@ -607,13 +607,13 @@ The Activation Function converts this score into the final binary prediction.
 
 The original Perceptron uses the Step Function
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,& z \ge 0\\
 0,& z < 0
 \end{cases}
-\]
+$$
 
 which acts as a threshold-based decision maker.
 
@@ -796,9 +796,9 @@ Topics include:
 - What is a Decision Boundary?
 - Why is the boundary represented by
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 - How the Perceptron separates two classes.
 - Linear classifier.

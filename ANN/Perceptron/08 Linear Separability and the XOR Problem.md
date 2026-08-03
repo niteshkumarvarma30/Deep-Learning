@@ -24,9 +24,9 @@ After completing this chapter, you will be able to:
 
 From previous chapters, we learned that a Perceptron learns a Decision Boundary
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 using the Perceptron Learning Algorithm.
 
@@ -114,9 +114,9 @@ A Perceptron can successfully learn this Decision Boundary.
 
 Recall
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 This equation is linear.
 
@@ -275,9 +275,9 @@ Therefore,
 
 The Perceptron always learns
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 This is always a straight line.
 

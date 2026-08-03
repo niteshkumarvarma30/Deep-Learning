@@ -24,17 +24,17 @@ After completing this chapter, you will be able to:
 
 In the previous chapter we learned the Perceptron Learning Rule
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 One symbol in this equation has not yet been studied.
 
 That symbol is
 
-\[
+$$
 \eta
-\]
+$$
 
 called the **Learning Rate**.
 
@@ -148,9 +148,9 @@ The same thing happens in machine learning.
 
 Recall
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 Notice
 
@@ -206,23 +206,23 @@ Weight Update
 
 Now suppose
 
-\[
+$$
 \eta=0.1
-\]
+$$
 
 Weight Update
 
-\[
+$$
 4+0.1(1)(3)
-\]
+$$
 
-\[
+$$
 4+0.3
-\]
+$$
 
-\[
+$$
 4.3
-\]
+$$
 
 The correction is much smaller.
 
@@ -232,9 +232,9 @@ The correction is much smaller.
 
 Example
 
-\[
+$$
 \eta=0.001
-\]
+$$
 
 Weight Updates
 
@@ -272,9 +272,9 @@ Disadvantages
 
 Example
 
-\[
+$$
 \eta=5
-\]
+$$
 
 Weight Updates
 
@@ -573,9 +573,9 @@ The Learning Rate determines how much the Perceptron changes its weights after a
 
 It appears in the update rule
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 A small Learning Rate results in slow but stable learning.
 
@@ -589,9 +589,9 @@ Choosing an appropriate Learning Rate is essential for successful training.
 
 ✔ Learning Rate is represented by
 
-\[
+$$
 \eta
-\]
+$$
 
 ✔ It controls the size of weight updates.
 
@@ -629,9 +629,9 @@ The Learning Rate controls the size of the weight update after each incorrect pr
 
 In the Perceptron Learning Rule
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 ---
 

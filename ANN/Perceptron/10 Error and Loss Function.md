@@ -95,9 +95,9 @@ or
 
 The Perceptron computes
 
-\[
+$$
 Error = y-\hat y
-\]
+$$
 
 where
 
@@ -139,9 +139,9 @@ Prediction
 
 Error
 
-\[
+$$
 1-1=0
-\]
+$$
 
 Correct prediction.
 
@@ -165,9 +165,9 @@ Prediction
 
 Error
 
-\[
+$$
 0-0=0
-\]
+$$
 
 Again,
 
@@ -191,9 +191,9 @@ Prediction
 
 Error
 
-\[
+$$
 1-0=1
-\]
+$$
 
 Positive error.
 
@@ -217,9 +217,9 @@ Prediction
 
 Error
 
-\[
+$$
 0-1=-1
-\]
+$$
 
 Negative error.
 
@@ -529,9 +529,9 @@ Loss is computed repeatedly during training.
 
 The original Perceptron compares the predicted label with the actual label using the error term
 
-\[
+$$
 y-\hat y
-\]
+$$
 
 This error determines whether the weights should be updated.
 
@@ -547,9 +547,9 @@ The original Perceptron does not use differentiable loss functions because it re
 
 ✔ The Perceptron uses
 
-\[
+$$
 y-\hat y
-\]
+$$
 
 as its error signal.
 
@@ -567,9 +567,9 @@ as its error signal.
 
 **Answer:**
 
-\[
+$$
 y-\hat y
-\]
+$$
 
 ---
 
@@ -589,9 +589,9 @@ No.
 
 It uses only the prediction error
 
-\[
+$$
 y-\hat y
-\]
+$$
 
 ---
 

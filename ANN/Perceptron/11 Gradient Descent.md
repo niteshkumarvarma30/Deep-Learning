@@ -25,9 +25,9 @@ After completing this chapter, you will be able to:
 
 The Perceptron learns using
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 It updates weights only when it makes a mistake.
 
@@ -261,9 +261,9 @@ Gradient Descent means
 
 The update rule is
 
-\[
+$$
 w_{new}=w_{old}-\eta\frac{\partial L}{\partial w}
-\]
+$$
 
 This is one of the most important equations in Machine Learning.
 
@@ -329,13 +329,13 @@ Learning Rate = 0.5
 
 Update
 
-\[
+$$
 w=10-0.5(4)
-\]
+$$
 
-\[
+$$
 =8
-\]
+$$
 
 The weight moved closer to the minimum.
 
@@ -355,17 +355,17 @@ Learning Rate = 0.2
 
 Update
 
-\[
+$$
 6-0.2(-3)
-\]
+$$
 
-\[
+$$
 6+0.6
-\]
+$$
 
-\[
+$$
 6.6
-\]
+$$
 
 Notice
 
@@ -566,9 +566,9 @@ Gradient Descent is an optimization algorithm that minimizes a model's loss by r
 
 The update rule is
 
-\[
+$$
 w_{new}=w_{old}-\eta\frac{\partial L}{\partial w}
-\]
+$$
 
 Unlike the original Perceptron Learning Rule,
 
@@ -586,9 +586,9 @@ This makes it the foundation of modern Machine Learning and Deep Learning.
 
 ✔ Update equation
 
-\[
+$$
 w=w-\eta\frac{\partial L}{\partial w}
-\]
+$$
 
 ✔ Gradient points uphill.
 

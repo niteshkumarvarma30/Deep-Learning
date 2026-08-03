@@ -178,9 +178,9 @@ It cannot directly classify multiple classes.
 
 The Decision Boundary is
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 which is always linear.
 

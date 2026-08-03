@@ -280,21 +280,21 @@ z
 
 For two inputs,
 
-\[
+$$
 z = w_1x_1 + w_2x_2 + b
-\]
+$$
 
 For three inputs,
 
-\[
+$$
 z = w_1x_1 + w_2x_2 + w_3x_3 + b
-\]
+$$
 
 For n inputs,
 
-\[
+$$
 z = \sum_{i=1}^{n} w_i x_i + b
-\]
+$$
 
 This is the mathematical model of a Perceptron. It computes a single score that is later passed to the activation function. :contentReference[oaicite:1]{index=1}
 
@@ -318,9 +318,9 @@ b = 4
 
 Compute
 
-\[
+$$
 z = 3(2) + (-1)(5) + 4
-\]
+$$
 
 Step 1
 
@@ -362,31 +362,31 @@ Instead of writing long equations,
 
 we can write
 
-\[
+$$
 z = \mathbf{w}^T\mathbf{x} + b
-\]
+$$
 
 where
 
-\[
+$$
 \mathbf{x} =
 \begin{bmatrix}
 x_1\\
 x_2\\
 x_3
 \end{bmatrix}
-\]
+$$
 
 and
 
-\[
+$$
 \mathbf{w} =
 \begin{bmatrix}
 w_1\\
 w_2\\
 w_3
 \end{bmatrix}
-\]
+$$
 
 ---
 
@@ -394,9 +394,9 @@ w_3
 
 The term
 
-\[
+$$
 \mathbf{w}^T\mathbf{x}
-\]
+$$
 
 is called the **dot product**.
 
@@ -412,7 +412,7 @@ Add them together
 
 Example
 
-\[
+$$
 \begin{bmatrix}
 2\\
 3
@@ -428,7 +428,7 @@ Example
 8+15
 =
 23
-\]
+$$
 
 Thus,
 
@@ -492,9 +492,9 @@ Each feature is multiplied by a learned weight.
 
 The weighted values are added together, and a bias is added to produce the **weighted sum**:
 
-\[
+$$
 z = \sum_{i=1}^{n} w_i x_i + b
-\]
+$$
 
 This weighted sum is not yet a prediction. It is the input to the activation function, which converts it into the final binary output.
 
@@ -510,15 +510,15 @@ This weighted sum is not yet a prediction. It is the input to the activation fun
 
 ✔ The weighted sum is computed as
 
-\[
+$$
 z = \sum_{i=1}^{n} w_i x_i + b
-\]
+$$
 
 ✔ Vector notation
 
-\[
+$$
 z = \mathbf{w}^T\mathbf{x} + b
-\]
+$$
 
 is a compact way of writing the same computation.
 
@@ -532,9 +532,9 @@ is a compact way of writing the same computation.
 
 **Answer:**
 
-\[
+$$
 z = \sum_{i=1}^{n} w_i x_i + b
-\]
+$$
 
 ---
 
@@ -560,9 +560,9 @@ Bias shifts the decision boundary, allowing the model to classify data more flex
 
 The weighted sum is the linear combination of the inputs and weights plus the bias:
 
-\[
+$$
 z = \sum_{i=1}^{n} w_i x_i + b
-\]
+$$
 
 It is the input to the activation function.
 
@@ -601,9 +601,9 @@ Calculate the weighted sum.
 
 **Answer:**
 
-\[
+$$
 z = 2(3) + (-1)(4) + 5 = 7
-\]
+$$
 
 ---
 
@@ -625,9 +625,9 @@ b = 1
 
 Find the value of
 
-\[
+$$
 z
-\]
+$$
 
 ---
 

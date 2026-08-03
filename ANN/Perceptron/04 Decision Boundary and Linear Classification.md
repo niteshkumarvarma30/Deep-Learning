@@ -5,9 +5,9 @@
 > **Chapter Goal:**
 > Understand what a Decision Boundary is, how a Perceptron separates different classes, why it is called a Linear Classifier, and how the equation
 >
-> \[
+> $$
 > w^Tx+b=0
-> \]
+> $$
 >
 > represents the boundary between two classes.
 
@@ -48,19 +48,19 @@ Prediction
 
 The weighted sum is
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 The Step Function says
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,&z\ge0\\
 0,&z<0
 \end{cases}
-\]
+$$
 
 Now an important question arises.
 
@@ -118,9 +118,9 @@ Every point on the other side belongs to another class.
 
 Recall
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 Prediction
 
@@ -156,9 +156,9 @@ Therefore,
 
 the Decision Boundary is
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 This equation is the foundation of linear classification in the Perceptron. :contentReference[oaicite:1]{index=1}
 
@@ -228,9 +228,9 @@ Everything below belongs to the other.
 
 Suppose
 
-\[
+$$
 2x_1+x_2-6=0
-\]
+$$
 
 This is our Decision Boundary.
 
@@ -240,17 +240,17 @@ Now classify three points.
 
 ### Point A
 
-\[
+$$
 (4,2)
-\]
+$$
 
 Substitute
 
-\[
+$$
 2(4)+2-6
 =
 4
-\]
+$$
 
 Since
 
@@ -268,17 +268,17 @@ Class 1
 
 ### Point B
 
-\[
+$$
 (1,1)
-\]
+$$
 
 Substitute
 
-\[
+$$
 2(1)+1-6
 =
 -3
-\]
+$$
 
 Prediction
 
@@ -290,17 +290,17 @@ Class 0
 
 ### Point C
 
-\[
+$$
 (2,2)
-\]
+$$
 
 Substitute
 
-\[
+$$
 2(2)+2-6
 =
 0
-\]
+$$
 
 This point lies exactly on the Decision Boundary.
 
@@ -332,9 +332,9 @@ The Perceptron tries to place this wall so that every class lies on its correct 
 
 The equation
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 is a **linear equation**.
 
@@ -356,17 +356,17 @@ Weights determine the **orientation (slope)** of the Decision Boundary.
 
 Suppose
 
-\[
+$$
 x+y=0
-\]
+$$
 
 This gives one line.
 
 Now change it to
 
-\[
+$$
 3x+y=0
-\]
+$$
 
 The line rotates.
 
@@ -390,15 +390,15 @@ Bias shifts the Decision Boundary without changing its orientation.
 
 Example
 
-\[
+$$
 x+y=0
-\]
+$$
 
 Now
 
-\[
+$$
 x+y-5=0
-\]
+$$
 
 The entire line moves.
 
@@ -579,25 +579,25 @@ The Perceptron divides the feature space into two regions.
 
 The equation
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 defines the Decision Boundary.
 
 Points with
 
-\[
+$$
 z\ge0
-\]
+$$
 
 belong to one class.
 
 Points with
 
-\[
+$$
 z<0
-\]
+$$
 
 belong to the other.
 
@@ -613,15 +613,15 @@ the Perceptron is called a **Linear Classifier**.
 
 ✔ Decision Boundary is obtained by setting
 
-\[
+$$
 z=0
-\]
+$$
 
 ✔ Mathematical equation
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 ✔ Weights rotate the boundary.
 
@@ -645,9 +645,9 @@ A Decision Boundary is the boundary that separates different prediction classes.
 
 ### Q2. Why is the equation
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 called the Decision Boundary?
 
@@ -680,9 +680,9 @@ A Hyperplane is the generalized Decision Boundary in higher-dimensional feature 
 1. Explain the concept of a Decision Boundary.
 2. Why do we set
 
-\[
+$$
 z=0
-\]
+$$
 
 to obtain the Decision Boundary?
 
@@ -698,9 +698,9 @@ to obtain the Decision Boundary?
 
 Given
 
-\[
+$$
 x+y-5=0
-\]
+$$
 
 Classify
 
@@ -724,9 +724,9 @@ Determine whether
 
 belongs to Class 0 or Class 1 for
 
-\[
+$$
 2x+y-8=0
-\]
+$$
 
 ---
 

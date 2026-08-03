@@ -294,17 +294,17 @@ Step 1
 
 Compute
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 Step 2
 
 Apply an Activation Function
 
-\[
+$$
 a=f(z)
-\]
+$$
 
 Step 3
 

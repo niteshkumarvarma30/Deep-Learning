@@ -131,75 +131,75 @@ Convergence
 
 ## Weighted Sum
 
-\[
+$$
 z=\sum_{i=1}^{n}w_ix_i+b
-\]
+$$
 
 or
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 ---
 
 ## Step Function
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,&z\ge0\\
 0,&z<0
 \end{cases}
-\]
+$$
 
 ---
 
 ## Error
 
-\[
+$$
 Error=y-\hat y
-\]
+$$
 
 ---
 
 ## Weight Update
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 ---
 
 ## Bias Update
 
-\[
+$$
 b_{new}=b_{old}+\eta(y-\hat y)
-\]
+$$
 
 ---
 
 ## Decision Boundary
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 ---
 
 ## Gradient Descent (Modern ML)
 
-\[
+$$
 w=w-\eta\frac{\partial L}{\partial w}
-\]
+$$
 
 ---
 
 ## Sigmoid Function
 
-\[
+$$
 \sigma(z)=\frac1{1+e^{-z}}
-\]
+$$
 
 ---
 
@@ -337,9 +337,9 @@ Who invented the Perceptron?
 
 What is the Perceptron equation?
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 ---
 
@@ -459,9 +459,9 @@ b=2
 
 Find
 
-\[
+$$
 z
-\]
+$$
 
 ---
 
@@ -469,9 +469,9 @@ z
 
 Using
 
-\[
+$$
 w=w+\eta(y-\hat y)x
-\]
+$$
 
 update the weight.
 
@@ -595,45 +595,45 @@ Remember these equations.
 
 ### Weighted Sum
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 ---
 
 ### Step Function
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,&z\ge0\\
 0,&z<0
 \end{cases}
-\]
+$$
 
 ---
 
 ### Weight Update
 
-\[
+$$
 w=w+\eta(y-\hat y)x
-\]
+$$
 
 ---
 
 ### Decision Boundary
 
-\[
+$$
 w^Tx+b=0
-\]
+$$
 
 ---
 
 ### Gradient Descent
 
-\[
+$$
 w=w-\eta\frac{\partial L}{\partial w}
-\]
+$$
 
 ---
 

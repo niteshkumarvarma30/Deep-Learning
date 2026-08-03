@@ -82,15 +82,15 @@ Learning simply means
 
 The Perceptron updates each weight using
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat{y})x
-\]
+$$
 
 The bias is updated using
 
-\[
+$$
 b_{new}=b_{old}+\eta(y-\hat{y})
-\]
+$$
 
 These equations form the core of the Perceptron Learning Algorithm. They represent the update process described in your PDF. :contentReference[oaicite:1]{index=1}
 
@@ -113,9 +113,9 @@ These equations form the core of the Perceptron Learning Algorithm. They represe
 
 The most important part of the equation is
 
-\[
+$$
 (y-\hat{y})
-\]
+$$
 
 This tells the Perceptron
 
@@ -139,9 +139,9 @@ Predicted
 
 Error
 
-\[
+$$
 1-1=0
-\]
+$$
 
 Weight Update
 
@@ -167,9 +167,9 @@ Predicted
 
 Error
 
-\[
+$$
 0-0=0
-\]
+$$
 
 Again,
 
@@ -193,9 +193,9 @@ Predicted
 
 Error
 
-\[
+$$
 1-0=1
-\]
+$$
 
 Positive error.
 
@@ -219,9 +219,9 @@ Predicted
 
 Error
 
-\[
+$$
 0-1=-1
-\]
+$$
 
 Negative error.
 
@@ -233,9 +233,9 @@ The weights decrease.
 
 Notice
 
-\[
+$$
 \eta(y-\hat{y})x
-\]
+$$
 
 contains
 
@@ -271,9 +271,9 @@ Multiplying by the input automatically ensures that only influential features re
 
 The symbol
 
-\[
+$$
 \eta
-\]
+$$
 
 is called the **Learning Rate**.
 
@@ -317,25 +317,25 @@ Predicted = 0
 
 Error
 
-\[
+$$
 1-0=1
-\]
+$$
 
 ### Step 2
 
 Apply the update rule
 
-\[
+$$
 w_{new}=2+0.1(1)(3)
-\]
+$$
 
-\[
+$$
 =2+0.3
-\]
+$$
 
-\[
+$$
 =2.3
-\]
+$$
 
 The weight has increased.
 
@@ -359,23 +359,23 @@ Predicted = 1
 
 Error
 
-\[
+$$
 0-1=-1
-\]
+$$
 
 Update
 
-\[
+$$
 5+0.2(-1)(4)
-\]
+$$
 
-\[
+$$
 5-0.8
-\]
+$$
 
-\[
+$$
 =4.2
-\]
+$$
 
 The weight decreases.
 
@@ -395,17 +395,17 @@ x₃
 
 Each weight is updated independently.
 
-\[
+$$
 w_1=w_1+\eta(y-\hat{y})x_1
-\]
+$$
 
-\[
+$$
 w_2=w_2+\eta(y-\hat{y})x_2
-\]
+$$
 
-\[
+$$
 w_3=w_3+\eta(y-\hat{y})x_3
-\]
+$$
 
 The same error term is used,
 
@@ -417,9 +417,9 @@ but each weight changes according to its own feature value.
 
 Bias update
 
-\[
+$$
 b_{new}=b_{old}+\eta(y-\hat{y})
-\]
+$$
 
 Notice
 
@@ -584,15 +584,15 @@ The Perceptron learns by updating its weights and bias whenever it makes an inco
 
 The Weight Update Rule is
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat{y})x
-\]
+$$
 
 and the Bias Update Rule is
 
-\[
+$$
 b_{new}=b_{old}+\eta(y-\hat{y})
-\]
+$$
 
 These updates gradually improve the Decision Boundary, enabling the Perceptron to correctly classify the training data.
 
@@ -604,15 +604,15 @@ These updates gradually improve the Decision Boundary, enabling the Perceptron t
 
 ✔ Weight Update Rule
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat{y})x
-\]
+$$
 
 ✔ Bias Update Rule
 
-\[
+$$
 b_{new}=b_{old}+\eta(y-\hat{y})
-\]
+$$
 
 ✔ Error determines the direction of the update.
 
@@ -628,9 +628,9 @@ b_{new}=b_{old}+\eta(y-\hat{y})
 
 **Answer:**
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat{y})x
-\]
+$$
 
 ---
 

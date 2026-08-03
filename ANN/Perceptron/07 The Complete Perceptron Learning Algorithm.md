@@ -26,9 +26,9 @@ From the previous chapters, we know that the Perceptron learns by updating its w
 
 The update rule is
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 But an important question still remains.
 
@@ -168,9 +168,9 @@ For every sample,
 
 calculate
 
-\[
+$$
 z=w^Tx+b
-\]
+$$
 
 Example
 
@@ -186,17 +186,17 @@ x₂ = 2
 b = 1
 ```
 
-\[
+$$
 z=2(3)+(-1)(2)+1
-\]
+$$
 
-\[
+$$
 =6-2+1
-\]
+$$
 
-\[
+$$
 =5
-\]
+$$
 
 ---
 
@@ -204,13 +204,13 @@ z=2(3)+(-1)(2)+1
 
 Apply
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,&z\ge0\\
 0,&z<0
 \end{cases}
-\]
+$$
 
 Since
 
@@ -262,9 +262,9 @@ Now update the weights.
 
 Apply
 
-\[
+$$
 w_{new}=w_{old}+\eta(y-\hat y)x
-\]
+$$
 
 Update
 
@@ -540,20 +540,20 @@ Wrong.
 
 Update
 
-\[
+$$
 w=0+1(0-1)(-1)
-\]
+$$
 
-\[
+$$
 =1
-\]
+$$
 
 Bias
 
-\[
+$$
 b=0+1(0-1)
 =-1
-\]
+$$
 
 The Perceptron has learned from its mistake.
 
@@ -788,9 +788,9 @@ How many iterations occur in **5 epochs**?
 
 **Answer:**
 
-\[
+$$
 250 \times 5 = 1250 \text{ iterations}
-\]
+$$
 
 ---
 

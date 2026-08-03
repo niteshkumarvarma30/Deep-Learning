@@ -186,9 +186,9 @@ Inputs are the information provided to the neuron.
 
 They are represented as
 
-\[
+$$
 x_1,x_2,x_3,\ldots,x_n
-\]
+$$
 
 Examples:
 
@@ -232,9 +232,9 @@ Weights represent the importance of each input.
 
 Weights are represented as
 
-\[
+$$
 w_1,w_2,w_3,\ldots,w_n
-\]
+$$
 
 Example
 
@@ -295,9 +295,9 @@ Salary influences the prediction more strongly.
 
 All contributions are added together.
 
-\[
+$$
 z=x_1w_1+x_2w_2+\cdots+x_nw_n
-\]
+$$
 
 Example
 
@@ -323,13 +323,13 @@ w₃ = 2
 
 Then
 
-\[
+$$
 z=5\times4+2\times1+8\times2
-\]
+$$
 
-\[
+$$
 z=20+2+16=38
-\]
+$$
 
 This value is called the **weighted sum**.
 
@@ -341,9 +341,9 @@ Bias is an additional value added after the weighted sum.
 
 The equation becomes
 
-\[
+$$
 z=x_1w_1+x_2w_2+\cdots+x_nw_n+b
-\]
+$$
 
 Example
 
@@ -383,9 +383,9 @@ An activation function converts the weighted sum into the neuron's final output.
 
 Mathematically,
 
-\[
+$$
 a=f(z)
-\]
+$$
 
 where
 
@@ -401,25 +401,25 @@ Without activation functions, every layer performs only a linear transformation.
 
 Suppose
 
-\[
+$$
 y=2x+3
-\]
+$$
 
 Another layer
 
-\[
+$$
 z=4y+5
-\]
+$$
 
 Substituting,
 
-\[
+$$
 z=4(2x+3)+5
-\]
+$$
 
-\[
+$$
 z=8x+17
-\]
+$$
 
 Even after combining multiple layers, the result remains a linear equation.
 
@@ -443,21 +443,21 @@ Activation functions introduce **non-linearity**, allowing neural networks to so
 
 The original perceptron used the Step Function.
 
-\[
+$$
 f(z)=
 \begin{cases}
 1,&z\ge0\\
 0,&z<0
 \end{cases}
-\]
+$$
 
 Example
 
 If
 
-\[
+$$
 z=6
-\]
+$$
 
 Output
 
@@ -467,9 +467,9 @@ Output
 
 If
 
-\[
+$$
 z=-2
-\]
+$$
 
 Output
 
@@ -533,35 +533,35 @@ Suppose
 
 Bias
 
-\[
+$$
 b=1
-\]
+$$
 
 Step 1
 
-\[
+$$
 2\times0.5=1
-\]
+$$
 
-\[
+$$
 3\times0.2=0.6
-\]
+$$
 
-\[
+$$
 1\times0.8=0.8
-\]
+$$
 
 Step 2
 
-\[
+$$
 1+0.6+0.8=2.4
-\]
+$$
 
 Step 3
 
-\[
+$$
 z=2.4+1=3.4
-\]
+$$
 
 Step 4
 
@@ -569,9 +569,9 @@ Apply Step Function
 
 Since
 
-\[
+$$
 z>0
-\]
+$$
 
 Output
 
@@ -618,13 +618,13 @@ Its working consists of:
 
 Mathematically,
 
-\[
+$$
 z=\sum_{i=1}^{n}x_iw_i+b
-\]
+$$
 
-\[
+$$
 a=f(z)
-\]
+$$
 
 These two equations form the mathematical foundation of all modern deep learning models.
 
