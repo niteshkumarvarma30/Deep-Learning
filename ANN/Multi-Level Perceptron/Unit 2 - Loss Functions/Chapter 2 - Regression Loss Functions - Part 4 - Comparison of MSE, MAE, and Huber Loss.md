@@ -73,20 +73,7 @@ MAE takes the absolute value of every prediction error before averaging.
 ## Huber Loss
 
 $$
-\boxed{
-L_\delta(y,\hat{y})=
-\begin{cases}
-\frac12(y-\hat{y})^2,
-&
-|y-\hat{y}|\le\delta
-\\[8pt]
-\delta|y-\hat{y}|
--
-\frac12\delta^2,
-&
-|y-\hat{y}|>\delta
-\end{cases}
-}
+\boxed{ L_\delta(y,\hat{y}) = \begin{cases} \frac12(y-\hat{y})^2, & |y-\hat{y}|\le\delta \\[8pt] \delta|y-\hat{y}| - \frac12\delta^2, & |y-\hat{y}|>\delta \end{cases} }
 $$
 
 Huber Loss combines the behavior of MSE and MAE.

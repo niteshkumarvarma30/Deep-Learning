@@ -265,32 +265,13 @@ Therefore,
 multiply the objective by **−1**.
 
 $$
--\log L
-=
--
-\sum_{i=1}^{n}
-\left[
-y_i\log(\hat y_i)
-+
-(1-y_i)\log(1-\hat y_i)
-\right]
+-\log L = - \sum_{i=1}^{n} \left[ y_i\log(\hat y_i) + (1-y_i)\log(1-\hat y_i) \right]
 $$
 
 Now divide by the number of training samples.
 
 $$
-\boxed{
-J
-=
--
-\frac1n
-\sum_{i=1}^{n}
-\left[
-y_i\log(\hat y_i)
-+
-(1-y_i)\log(1-\hat y_i)
-\right]
-}
+\boxed{ J = - \frac1n \sum_{i=1}^{n} \left[ y_i\log(\hat y_i) + (1-y_i)\log(1-\hat y_i) \right] }
 $$
 
 This is exactly the
@@ -518,14 +499,7 @@ During Deep Learning,
 the framework directly computes
 
 $$
-L
-=
--
-\left[
-y\log(\hat y)
-+
-(1-y)\log(1-\hat y)
-\right]
+L = - \left[ y\log(\hat y) + (1-y)\log(1-\hat y) \right]
 $$
 
 It does **not** separately compute

@@ -178,14 +178,7 @@ Like Binary Cross Entropy,
 For one training example,
 
 $$
-\boxed{
-L
-=
--
-\sum_{i=1}^{C}
-y_i
-\log(\hat y_i)
-}
+\boxed{ L = - \sum_{i=1}^{C} y_i \log(\hat y_i) }
 $$
 
 where
@@ -262,16 +255,7 @@ Prediction
 Substitute into the formula.
 
 $$
-L
-=
--
-[
-0\log(0.10)
-+
-1\log(0.80)
-+
-0\log(0.10)
-]
+L = - [ 0\log(0.10) + 1\log(0.80) + 0\log(0.10) ]
 $$
 
 Since
@@ -283,10 +267,7 @@ $$
 the equation becomes
 
 $$
-L
-=
--
-\log(0.80)
+L = - \log(0.80)
 $$
 
 Only the probability assigned to the **correct class** affects the loss.
@@ -318,10 +299,7 @@ Prediction
 Loss
 
 $$
-L
-=
--
-\log(0.90)
+L = - \log(0.90)
 $$
 
 Approximate Value
@@ -355,10 +333,7 @@ Prediction
 Loss
 
 $$
-L
-=
--
-\log(0.20)
+L = - \log(0.20)
 $$
 
 Approximate Value
@@ -542,12 +517,7 @@ CCE is almost always paired with the **Softmax Activation Function**, making it 
 ✔ Formula
 
 $$
-L
-=
--
-\sum_{i=1}^{C}
-y_i
-\log(\hat y_i)
+L = - \sum_{i=1}^{C} y_i \log(\hat y_i)
 $$
 
 ✔ Only the probability of the correct class contributes to the loss.

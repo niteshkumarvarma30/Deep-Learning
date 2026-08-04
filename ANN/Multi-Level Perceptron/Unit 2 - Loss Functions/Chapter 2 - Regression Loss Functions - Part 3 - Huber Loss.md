@@ -152,20 +152,7 @@ This prevents outliers from dominating the total loss.
 The Huber Loss function is
 
 $$
-\boxed{
-L_\delta(y,\hat{y})=
-\begin{cases}
-\frac{1}{2}(y-\hat{y})^2,
-&
-|y-\hat{y}| \leq \delta
-\\[8pt]
-\delta|y-\hat{y}|
--
-\frac{1}{2}\delta^2,
-&
-|y-\hat{y}|>\delta
-\end{cases}
-}
+\boxed{ L_\delta(y,\hat{y}) = \begin{cases} \frac{1}{2}(y-\hat{y})^2, & |y-\hat{y}| \leq \delta \\[8pt] \delta|y-\hat{y}| - \frac{1}{2}\delta^2, & |y-\hat{y}|>\delta \end{cases} }
 $$
 
 where
@@ -211,9 +198,7 @@ $$
 Huber Loss becomes
 
 $$
-\delta|y-\hat{y}|
--
-\frac12\delta^2
+\delta|y-\hat{y}| - \frac12\delta^2
 $$
 
 This behaves like MAE.
@@ -311,15 +296,7 @@ $$
 we use the second equation.
 
 $$
-L
-=
-1(3)
--
-\frac12(1)^2
-=
-3-0.5
-=
-2.5
+L = 1(3) - \frac12(1)^2 = 3-0.5 = 2.5
 $$
 
 Final Loss
