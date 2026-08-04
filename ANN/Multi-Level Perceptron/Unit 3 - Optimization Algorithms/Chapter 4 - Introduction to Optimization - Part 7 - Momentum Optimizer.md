@@ -2,7 +2,7 @@
 
 # Chapter 4 – Optimization Algorithms
 
-## Part 6 – Momentum Optimizer
+## Part 7 – Momentum Optimizer
 
 ---
 

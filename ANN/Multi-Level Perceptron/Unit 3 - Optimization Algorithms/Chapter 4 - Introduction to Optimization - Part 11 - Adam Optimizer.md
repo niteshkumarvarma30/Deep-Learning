@@ -2,7 +2,7 @@
 
 # Chapter 4 – Optimization Algorithms
 
-## Part 8 – Adam Optimizer (Adaptive Moment Estimation)
+## Part 11 – Adam Optimizer (Adaptive Moment Estimation)
 
 ---
 

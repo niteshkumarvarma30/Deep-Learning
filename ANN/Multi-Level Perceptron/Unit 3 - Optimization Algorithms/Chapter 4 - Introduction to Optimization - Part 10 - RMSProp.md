@@ -2,7 +2,7 @@
 
 # Chapter 4 – Optimization Algorithms
 
-## Part 7 – RMSProp (Root Mean Square Propagation)
+## Part 10 – RMSProp (Root Mean Square Propagation)
 
 ---
 
