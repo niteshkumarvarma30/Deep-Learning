@@ -1,4 +1,4 @@
-# Unit 2 – Optimization Algorithms
+# Unit 3 – Optimization Algorithms
 
 # Chapter 4 – Optimization Algorithms
 
