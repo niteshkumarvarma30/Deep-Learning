@@ -49,16 +49,18 @@ It takes a vector of raw scores (logits) and squashes them into a vector of prob
 
 # 3. Mathematical Equation
 
-For a given output node \( i \), the Softmax probability is calculated as:
+For a given output node $ i $, the Softmax probability is calculated as:
 
 $$
+
 \text{Softmax}(z_i) = \frac{e^{z_i}}{\sum_{j=1}^{K} e^{z_j}}
+
 $$
 
 Where:
-- \( z_i \) is the raw score (logit) of the current class.
-- \( e \) is Euler's number (~2.718).
-- \( K \) is the total number of classes.
+- $ z_i $ is the raw score (logit) of the current class.
+- $ e $ is Euler's number (~2.718).
+- $ K $ is the total number of classes.
 - The denominator is the sum of the exponential of all raw scores.
 
 ---
@@ -68,14 +70,14 @@ Where:
 Let's calculate Softmax for our previous example:
 
 Raw scores (logits):
-- Dog (\( z_1 \)) = 2.5
-- Cat (\( z_2 \)) = 4.1
-- Bird (\( z_3 \)) = -1.2
+- Dog ($ z_1 $) = 2.5
+- Cat ($ z_2 $) = 4.1
+- Bird ($ z_3 $) = -1.2
 
-### Step 1: Calculate Exponentials (\( e^z \))
-- \( e^{2.5} \approx 12.18 \)
-- \( e^{4.1} \approx 60.34 \)
-- \( e^{-1.2} \approx 0.30 \)
+### Step 1: Calculate Exponentials ($ e^z $)
+- $ e^{2.5} \approx 12.18 $
+- $ e^{4.1} \approx 60.34 $
+- $ e^{-1.2} \approx 0.30 $
 
 ### Step 2: Calculate the Sum
 Sum = 12.18 + 60.34 + 0.30 = **72.82**
@@ -92,7 +94,7 @@ The network predicts "Cat" with 82.8% confidence.
 
 ---
 
-# 5. Why use the Exponential Function (\( e^z \))?
+# 5. Why use the Exponential Function ($ e^z $)?
 
 You might wonder, why not just divide the raw score by the sum of raw scores? Why use exponentials?
 

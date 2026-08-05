@@ -38,7 +38,9 @@ The Sigmoid function, also known as the Logistic function, takes any real number
 ## Mathematical Equation
 
 $$
+
 \sigma(z) = \frac{1}{1 + e^{-z}}
+
 $$
 
 ## Graph
@@ -52,8 +54,8 @@ $$
     -∞       0       +∞
 ```
 
-If \( z \) is a large positive number, the output is close to 1.
-If \( z \) is a large negative number, the output is close to 0.
+If $ z $ is a large positive number, the output is close to 1.
+If $ z $ is a large negative number, the output is close to 0.
 
 ## Advantages of Sigmoid
 
@@ -64,9 +66,9 @@ If \( z \) is a large negative number, the output is close to 0.
 
 Despite its early popularity, Sigmoid is rarely used in hidden layers today due to three major problems:
 
-1.  **Vanishing Gradients:** Look at the graph. When \( z \) is very large (e.g., +10) or very small (e.g., -10), the curve becomes flat. In these flat regions, the derivative (gradient) is almost zero. During Backpropagation, these near-zero gradients multiply, causing the network to stop learning entirely.
+1.  **Vanishing Gradients:** Look at the graph. When $ z $ is very large (e.g., +10) or very small (e.g., -10), the curve becomes flat. In these flat regions, the derivative (gradient) is almost zero. During Backpropagation, these near-zero gradients multiply, causing the network to stop learning entirely.
 2.  **Not Zero-Centered:** The outputs are always positive (between 0 and 1). This forces the gradients during backpropagation to move in a zig-zag, inefficient path, slowing down training.
-3.  **Computationally Expensive:** Computing the exponential function \( e^{-z} \) is relatively slow for computers when done millions of times.
+3.  **Computationally Expensive:** Computing the exponential function $ e^{-z} $ is relatively slow for computers when done millions of times.
 
 ---
 
@@ -79,7 +81,9 @@ Tanh is mathematically a shifted and stretched version of the Sigmoid function. 
 ## Mathematical Equation
 
 $$
+
 \tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}
+
 $$
 
 ## Graph
@@ -101,7 +105,7 @@ In practice, if you must choose between Sigmoid and Tanh for a hidden layer, **T
 
 ## Disadvantages of Tanh
 
-- **Vanishing Gradients:** Just like Sigmoid, Tanh saturates (flattens out) for large positive or negative values of \( z \). Thus, deep networks using Tanh still suffer heavily from the Vanishing Gradient problem.
+- **Vanishing Gradients:** Just like Sigmoid, Tanh saturates (flattens out) for large positive or negative values of $ z $. Thus, deep networks using Tanh still suffer heavily from the Vanishing Gradient problem.
 - **Computationally Expensive:** It still requires calculating exponentials.
 
 ---
@@ -128,7 +132,7 @@ Tanh is zero-centered (outputs range from -1 to 1), whereas Sigmoid is not (outp
 
 **Answer**
 
-For both Sigmoid and Tanh, when the input \( z \) becomes very large (positive or negative), the activation function reaches its limits (saturates) and the curve becomes perfectly flat. The derivative (slope) at these flat regions is almost zero. During Backpropagation, these zero gradients stop the weights from updating, stalling the learning process.
+For both Sigmoid and Tanh, when the input $ z $ becomes very large (positive or negative), the activation function reaches its limits (saturates) and the curve becomes perfectly flat. The derivative (slope) at these flat regions is almost zero. During Backpropagation, these zero gradients stop the weights from updating, stalling the learning process.
 
 ---
 

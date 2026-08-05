@@ -34,12 +34,14 @@ A dead neuron is a neuron that permanently outputs `0` for every single training
 Because the equation for ReLU is:
 
 $$
+
 f(z) = \max(0, z)
+
 $$
 
-If the weighted sum \( z \) is less than or equal to 0, the output is `0`.
+If the weighted sum $ z $ is less than or equal to 0, the output is `0`.
 
-If a neuron's weights are updated in such a way that it *always* produces a negative \( z \) for all inputs, it will always output `0`.
+If a neuron's weights are updated in such a way that it *always* produces a negative $ z $ for all inputs, it will always output `0`.
 
 ---
 
@@ -52,24 +54,32 @@ During Backpropagation, the network calculates the gradient (derivative) of the 
 The derivative of ReLU is:
 
 $$
+
 f'(z) = \begin{cases} 1, & \text{if } z > 0 \\ 0, & \text{if } z \le 0 \end{cases}
+
 $$
 
-If the neuron is outputting `0` because \( z \) is negative, its gradient \( f'(z) \) is also `0`.
+If the neuron is outputting `0` because $ z $ is negative, its gradient $ f'(z) $ is also `0`.
 
 ### The Weight Update Rule:
 
 $$
+
 W_{new} = W_{old} - (\text{Learning Rate} \times \text{Gradient})
+
 $$
 
 If the Gradient is `0`:
 
 $$
+
 W_{new} = W_{old} - (\text{Learning Rate} \times 0)
+
 $$
+
 $$
 W_{new} = W_{old}
+
 $$
 
 The weights **do not change**.
@@ -95,7 +105,7 @@ The neuron is stuck in a permanent coma. It will never activate again.
 There are two main culprits that cause neurons to die:
 
 ## Cause 1: A Learning Rate That is Too High
-If the learning rate is too large, the Gradient Descent step might be massive. A huge update can accidentally shift the weights and bias so far into the negative region that the neuron can never compute a positive \( z \) again.
+If the learning rate is too large, the Gradient Descent step might be massive. A huge update can accidentally shift the weights and bias so far into the negative region that the neuron can never compute a positive $ z $ again.
 
 ## Cause 2: Poor Weight Initialization
 If the network is initialized with large negative biases, or highly skewed negative weights, many neurons might start off dead before training even begins.
@@ -113,7 +123,9 @@ By using a smaller learning rate, weight updates are smaller and more controlled
 As we learned in Part 3, Leaky ReLU provides a small negative slope (e.g., 0.01) instead of 0.
 
 $$
+
 f'(z) = 0.01 \quad (\text{for } z < 0)
+
 $$
 
 Because the gradient is 0.01 (not 0), the weights can still update. The neuron has a chance to slowly drag its weights back into the positive region and "come back to life."
@@ -129,7 +141,7 @@ Using specialized initialization techniques like **He Initialization** ensures t
 
 **Answer**
 
-The Dying ReLU problem occurs when a neuron's weights are updated such that its weighted sum (\( z \)) is always negative for all inputs. Because the ReLU function outputs 0 for negative inputs, its gradient also becomes 0. Consequently, the weights are never updated during Backpropagation, and the neuron permanently stops learning.
+The Dying ReLU problem occurs when a neuron's weights are updated such that its weighted sum ($ z $) is always negative for all inputs. Because the ReLU function outputs 0 for negative inputs, its gradient also becomes 0. Consequently, the weights are never updated during Backpropagation, and the neuron permanently stops learning.
 
 ---
 

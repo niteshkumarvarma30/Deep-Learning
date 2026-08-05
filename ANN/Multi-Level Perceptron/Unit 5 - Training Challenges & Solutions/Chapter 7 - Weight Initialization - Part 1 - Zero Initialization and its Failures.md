@@ -32,33 +32,41 @@ It turns out, initializing weights to zero completely destroys the neural networ
 # 2. The Setup: Zero Initialization
 
 Imagine a simple network with:
-- 2 Input Neurons (\( x_1, x_2 \))
-- 2 Hidden Neurons (\( h_1, h_2 \))
+- 2 Input Neurons ($ x_1, x_2 $)
+- 2 Hidden Neurons ($ h_1, h_2 $)
 - 1 Output Neuron
 
 Suppose we initialize all weights to exactly `0`, and all biases to `0`.
 
 $$
+
 W^{[1]} = \begin{bmatrix} 0 & 0 \\ 0 & 0 \end{bmatrix}, \quad b^{[1]} = \begin{bmatrix} 0 \\ 0 \end{bmatrix}
+
 $$
 
-Let's pass an input, say \( x = [2, 3] \), into this network.
+Let's pass an input, say $ x = [2, 3] $, into this network.
 
 ---
 
 # 3. Forward Propagation with Zero Weights
 
-For the first hidden neuron \( h_1 \):
+For the first hidden neuron $ h_1 $:
+
 $$
+
 z_1 = (x_1 \cdot 0) + (x_2 \cdot 0) + 0 = 0
+
 $$
 
-For the second hidden neuron \( h_2 \):
+For the second hidden neuron $ h_2 $:
+
 $$
+
 z_2 = (x_1 \cdot 0) + (x_2 \cdot 0) + 0 = 0
+
 $$
 
-No matter what the input is, every neuron in the hidden layer computes exactly the same weighted sum (\( z = 0 \)).
+No matter what the input is, every neuron in the hidden layer computes exactly the same weighted sum ($ z = 0 $).
 
 After applying an activation function (like ReLU or Sigmoid), every hidden neuron will output the exact same activation value.
 
@@ -75,19 +83,19 @@ h2 outputs 'a'
 
 # 4. The Symmetry Problem in Backpropagation
 
-During Forward Propagation, \( h_1 \) and \( h_2 \) did exactly the same amount of "work" (which was nothing). They output identical values.
+During Forward Propagation, $ h_1 $ and $ h_2 $ did exactly the same amount of "work" (which was nothing). They output identical values.
 
-When we calculate the Loss and perform Backpropagation, the gradients flowing back to \( h_1 \) and \( h_2 \) will also be perfectly identical.
+When we calculate the Loss and perform Backpropagation, the gradients flowing back to $ h_1 $ and $ h_2 $ will also be perfectly identical.
 
-Because the gradients are identical, the weight updates for \( h_1 \) and \( h_2 \) will be identical!
+Because the gradients are identical, the weight updates for $ h_1 $ and $ h_2 $ will be identical!
 
 ### After 1 Epoch:
-- \( h_1 \) weights might become `[0.05, -0.02]`
-- \( h_2 \) weights will also become `[0.05, -0.02]`
+- $ h_1 $ weights might become `[0.05, -0.02]`
+- $ h_2 $ weights will also become `[0.05, -0.02]`
 
 ### After 100 Epochs:
-- \( h_1 \) weights might become `[1.2, -0.8]`
-- \( h_2 \) weights will also become `[1.2, -0.8]`
+- $ h_1 $ weights might become `[1.2, -0.8]`
+- $ h_2 $ weights will also become `[1.2, -0.8]`
 
 Both neurons will always compute the exact same feature. If you have 1,000 neurons in a hidden layer, they will all behave exactly like a single, redundant neuron.
 

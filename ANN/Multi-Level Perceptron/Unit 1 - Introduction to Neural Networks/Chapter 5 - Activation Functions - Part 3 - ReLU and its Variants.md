@@ -36,7 +36,9 @@ ReLU is incredibly simple. If the input is positive, it returns the input. If th
 ## Mathematical Equation
 
 $$
+
 f(z) = \max(0, z)
+
 $$
 
 ## Graph
@@ -52,13 +54,13 @@ $$
 
 ## Advantages of ReLU
 
-1. **No Vanishing Gradient (for positive \( z \)):** In the positive region, the derivative is always exactly 1. It never flattens out, meaning gradients do not vanish.
+1. **No Vanishing Gradient (for positive $ z $):** In the positive region, the derivative is always exactly 1. It never flattens out, meaning gradients do not vanish.
 2. **Extremely Fast Computation:** There are no expensive exponential functions to calculate. It just involves a simple `if` condition or `max(0, z)` operation.
 3. **Sparse Activation:** Because all negative inputs are output as exactly 0, only a subset of neurons in the network is activated at any given time. This sparsity makes the network highly efficient and acts as a mild regularizer.
 
 ## Disadvantages of ReLU
 
-- **The Dying ReLU Problem:** This is its biggest flaw. If a large gradient updates a weight in such a way that the neuron always outputs a negative \( z \), the ReLU will output 0. Its gradient will also be 0. The neuron is essentially "dead" and will never update again.
+- **The Dying ReLU Problem:** This is its biggest flaw. If a large gradient updates a weight in such a way that the neuron always outputs a negative $ z $, the ReLU will output 0. Its gradient will also be 0. The neuron is essentially "dead" and will never update again.
 
 *(We will cover the Dying ReLU problem in detail in Part 4).*
 
@@ -77,7 +79,9 @@ Instead of making the output exactly zero for negative inputs, Leaky ReLU allows
 ### Mathematical Equation
 
 $$
+
 f(z) = \begin{cases} z, & \text{if } z \ge 0 \\ 0.01z, & \text{if } z < 0 \end{cases}
+
 $$
 
 ### How it solves Dying ReLU
@@ -92,10 +96,12 @@ In Leaky ReLU, the slope for negative values is fixed at `0.01`. In PReLU, this 
 ### Mathematical Equation
 
 $$
+
 f(z) = \begin{cases} z, & \text{if } z \ge 0 \\ \alpha z, & \text{if } z < 0 \end{cases}
+
 $$
 
-Here, \( \alpha \) (alpha) is not a fixed number. The neural network learns the best value for \( \alpha \) during Backpropagation via Gradient Descent.
+Here, $ \alpha $ (alpha) is not a fixed number. The neural network learns the best value for $ \alpha $ during Backpropagation via Gradient Descent.
 
 ---
 
@@ -106,7 +112,9 @@ ELU modifies the negative part of the curve to be a smooth exponential curve ins
 ### Mathematical Equation
 
 $$
+
 f(z) = \begin{cases} z, & \text{if } z \ge 0 \\ \alpha(e^z - 1), & \text{if } z < 0 \end{cases}
+
 $$
 
 ### Advantages
@@ -114,7 +122,7 @@ $$
 - Faster convergence than ReLU in some deep networks.
 
 ### Disadvantages
-- Computationally expensive due to the exponential function \( e^z \).
+- Computationally expensive due to the exponential function $ e^z $.
 
 ---
 
@@ -152,7 +160,7 @@ ReLU revolutionized Deep Learning by providing a fast, non-saturating activation
 
 # Key Takeaways
 
-✔ ReLU is defined as \( \max(0, z) \).
+✔ ReLU is defined as $ \max(0, z) $.
 ✔ ReLU is the default choice for hidden layers.
 ✔ It is computationally cheap and induces sparse activations.
 ✔ Leaky ReLU prevents the Dying ReLU problem by allowing a small negative slope.

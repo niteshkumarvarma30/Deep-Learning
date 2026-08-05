@@ -42,44 +42,56 @@ In Neural Networks, we apply this concept heavily between Forward Propagation an
 Let's review what happens during a single training step.
 
 ### Forward Propagation
-During Forward Propagation, the network calculates the weighted sums (\( z \)) and activations (\( a \)) layer by layer.
+During Forward Propagation, the network calculates the weighted sums ($ z $) and activations ($ a $) layer by layer.
 
 $$
+
 z^{[1]} = W^{[1]}x + b^{[1]}
+
 $$
+
 $$
 a^{[1]} = f(z^{[1]})
+
 $$
 
 $$
+
 z^{[2]} = W^{[2]}a^{[1]} + b^{[2]}
+
 $$
+
 $$
 a^{[2]} = f(z^{[2]})
+
 $$
 
 ### Backpropagation
 During Backpropagation, we calculate the gradients using the Chain Rule. 
-For example, to update \( W^{[2]} \), the gradient requires the derivative of the activation function and the output of the previous layer.
+For example, to update $ W^{[2]} $, the gradient requires the derivative of the activation function and the output of the previous layer.
 
 $$
+
 dW^{[2]} = dz^{[2]} \cdot (a^{[1]})^T
+
 $$
 
-Notice that the formula for Backpropagation *requires* variables that were already calculated during Forward Propagation (like \( a^{[1]} \) and \( z^{[2]} \)).
+Notice that the formula for Backpropagation *requires* variables that were already calculated during Forward Propagation (like $ a^{[1]} $ and $ z^{[2]} $).
 
 ---
 
 # 4. The Naive Approach vs Memoization
 
 ### The Naive Approach (No Caching)
-When it's time to do Backpropagation, the computer realizes it needs \( a^{[1]} \) to compute \( dW^{[2]} \).
-If it didn't save \( a^{[1]} \), it has to re-calculate it from scratch:
+When it's time to do Backpropagation, the computer realizes it needs $ a^{[1]} $ to compute $ dW^{[2]} $.
+If it didn't save $ a^{[1]} $, it has to re-calculate it from scratch:
+
 $$ a^{[1]} = f(W^{[1]}x + b^{[1]}) $$
+
 This wastes an incredible amount of CPU/GPU cycles.
 
 ### The Memoization Approach (Caching)
-During Forward Propagation, as soon as the network calculates \( z^{[1]} \), \( a^{[1]} \), \( z^{[2]} \), etc., it **stores them in memory (cache)**.
+During Forward Propagation, as soon as the network calculates $ z^{[1]} $, $ a^{[1]} $, $ z^{[2]} $, etc., it **stores them in memory (cache)**.
 
 ```text
 Forward Pass
@@ -107,7 +119,7 @@ Compute Gradients instantly!
 
 Memoization highlights a classic computer science dilemma: **Memory vs Speed**.
 
-- By saving all intermediate variables (\( z \)'s and \( a \)'s) in memory, we sacrifice a large amount of RAM (or GPU VRAM).
+- By saving all intermediate variables ($ z $'s and $ a $'s) in memory, we sacrifice a large amount of RAM (or GPU VRAM).
 - In exchange, we gain a massive speed boost, cutting training times down by orders of magnitude.
 
 This is why training deep neural networks requires GPUs with massive amounts of VRAM (e.g., 16GB, 24GB, or even 80GB). The memory is mostly being used to cache these intermediate forward propagation values for the backward pass!
@@ -141,6 +153,6 @@ Memoization is a silent hero in deep learning. While mathematical algorithms lik
 # Key Takeaways
 
 ✔ Memoization means storing expensive computational results in a cache for reuse.
-✔ Forward Propagation calculates \( z \) and \( a \) values and caches them.
+✔ Forward Propagation calculates $ z $ and $ a $ values and caches them.
 ✔ Backpropagation reads these cached values instead of recomputing them.
 ✔ Memoization is the primary reason why neural network training requires significant amounts of RAM/VRAM.

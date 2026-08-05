@@ -36,13 +36,15 @@ We add a penalty term to the original Loss function. The penalty is the **sum of
 ## Mathematical Equation
 
 $$
+
 \text{Total Cost} = \text{Original Loss} + \frac{\lambda}{2m} \sum_{l=1}^{L} ||W^{[l]}||^2
+
 $$
 
 Where:
-- \( \lambda \) (Lambda) is the Regularization Parameter (a hyperparameter you choose, e.g., 0.01).
-- \( m \) is the number of training examples.
-- \( ||W^{[l]}||^2 \) is the sum of the squares of all weights in the network.
+- $ \lambda $ (Lambda) is the Regularization Parameter (a hyperparameter you choose, e.g., 0.01).
+- $ m $ is the number of training examples.
+- $ ||W^{[l]}||^2 $ is the sum of the squares of all weights in the network.
 
 ## How it works
 
@@ -60,7 +62,9 @@ L1 Regularization is similar, but instead of squaring the weights, we take the *
 ## Mathematical Equation
 
 $$
+
 \text{Total Cost} = \text{Original Loss} + \frac{\lambda}{m} \sum_{l=1}^{L} |W^{[l]}|
+
 $$
 
 ## How it works (Sparsity)
@@ -75,7 +79,7 @@ If a weight becomes exactly zero, that feature is completely ignored by the neur
 
 | Feature | L1 Regularization | L2 Regularization |
 |---------|-------------------|-------------------|
-| **Penalty Term** | Absolute value of weights (\( \|W\| \)) | Squared value of weights (\( W^2 \)) |
+| **Penalty Term** | Absolute value of weights ($ \|W\| $) | Squared value of weights ($ W^2 $) |
 | **Effect on Weights** | Drives many weights to exactly 0 | Drives weights close to 0, but rarely exactly 0 |
 | **Sparsity** | Creates a sparse model | Creates a dense model with small weights |
 | **Use Case** | When you have thousands of features and want to ignore useless ones (Feature Selection) | Default choice for Deep Learning to prevent overfitting |
@@ -113,4 +117,4 @@ By mathematically penalizing large weights, L1 and L2 regularization prevent a n
 ✔ Regularization is added as a penalty to the Loss Function.
 ✔ L2 uses squared weights and keeps weights small (Weight Decay).
 ✔ L1 uses absolute weights and drives weights to exactly zero (Sparsity).
-✔ \( \lambda \) (Lambda) controls how harsh the penalty is.
+✔ $ \lambda $ (Lambda) controls how harsh the penalty is.

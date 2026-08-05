@@ -25,10 +25,12 @@ In Chapter 1, we learned the components of an Artificial Neuron (Perceptron).
 We saw that the neuron calculates a **weighted sum** and adds a **bias**:
 
 $$
+
 z = x_1w_1 + x_2w_2 + \dots + x_nw_n + b
+
 $$
 
-This sum \( z \) can be any real number: very large positive, very large negative, or zero.
+This sum $ z $ can be any real number: very large positive, very large negative, or zero.
 
 By itself, this raw number doesn't tell us much. It is simply a linear combination of the inputs.
 
@@ -67,29 +69,40 @@ The most critical role of an activation function is to introduce **Non-Linearity
 
 ## The Problem with Linear Functions
 
-If we do not use an activation function (or use a purely linear one like \( f(z) = z \)), the neural network will behave like a single layer network, no matter how many layers it has.
+If we do not use an activation function (or use a purely linear one like $ f(z) = z $), the neural network will behave like a single layer network, no matter how many layers it has.
 
 Suppose we have two hidden layers with linear activations.
 
 Layer 1 computes:
+
 $$
+
 h_1 = W_1x + b_1
+
 $$
 
 Layer 2 computes:
-$$
-h_2 = W_2h_1 + b_2
+
 $$
 
-Substitute \( h_1 \) into the second equation:
+h_2 = W_2h_1 + b_2
+
 $$
+
+Substitute $ h_1 $ into the second equation:
+
+$$
+
 h_2 = W_2(W_1x + b_1) + b_2
+
 $$
+
 $$
 h_2 = (W_2W_1)x + (W_2b_1 + b_2)
+
 $$
 
-Notice that \( W_2W_1 \) is just another weight matrix, and \( W_2b_1 + b_2 \) is just another bias.
+Notice that $ W_2W_1 $ is just another weight matrix, and $ W_2b_1 + b_2 $ is just another bias.
 
 This means:
 

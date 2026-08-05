@@ -69,8 +69,11 @@ It scales the random weights by drawing them from a distribution with a specific
 For a Normal distribution, weights are drawn with mean = 0 and variance = `1 / Fan-in`.
 
 Sometimes, it is defined using both Fan-in and Fan-out:
+
 $$
+
 \text{Variance} = \frac{2}{\text{Fan-in} + \text{Fan-out}}
+
 $$
 
 ## When to use Xavier Initialization?
@@ -91,7 +94,9 @@ ReLU zeroes out half of the inputs (all the negative ones). Because half the sig
 For a Normal distribution, weights are drawn with mean = 0 and variance = `2 / Fan-in`.
 
 $$
+
 \text{Variance} = \frac{2}{\text{Fan-in}}
+
 $$
 
 ## When to use He Initialization?

@@ -64,35 +64,46 @@ It does this for every single mini-batch during training.
 
 # 4. The Math Behind Batch Normalization
 
-For a given mini-batch of size \( m \):
+For a given mini-batch of size $ m $:
 
 ### Step 1: Calculate the Mean of the Batch
+
 $$
+
 \mu_B = \frac{1}{m} \sum_{i=1}^{m} z_i
+
 $$
 
 ### Step 2: Calculate the Variance of the Batch
+
 $$
+
 \sigma_B^2 = \frac{1}{m} \sum_{i=1}^{m} (z_i - \mu_B)^2
+
 $$
 
 ### Step 3: Normalize
-Subtract the mean and divide by the standard deviation (plus a tiny number \( \epsilon \) to prevent division by zero).
+Subtract the mean and divide by the standard deviation (plus a tiny number $ \epsilon $ to prevent division by zero).
+
 $$
+
 \hat{z}_i = \frac{z_i - \mu_B}{\sqrt{\sigma_B^2 + \epsilon}}
+
 $$
 
 ### Step 4: Scale and Shift (Crucial Step!)
 If we strictly force the data to always have a mean of 0 and variance of 1, we might destroy useful patterns that the network learned. 
 Therefore, BatchNorm introduces two **learnable parameters**:
-- \( \gamma \) (Gamma): Allows the network to scale the variance.
-- \( \beta \) (Beta): Allows the network to shift the mean.
+- $ \gamma $ (Gamma): Allows the network to scale the variance.
+- $ \beta $ (Beta): Allows the network to shift the mean.
 
 $$
+
 z_{out} = \gamma \hat{z}_i + \beta
+
 $$
 
-The network will learn the optimal \( \gamma \) and \( \beta \) during Backpropagation! If the network decides that a mean of 5 and variance of 2 is actually better for this specific layer, it will learn to adjust Gamma and Beta to make it happen.
+The network will learn the optimal $ \gamma $ and $ \beta $ during Backpropagation! If the network decides that a mean of 5 and variance of 2 is actually better for this specific layer, it will learn to adjust Gamma and Beta to make it happen.
 
 ---
 
@@ -145,5 +156,5 @@ Batch Normalization is one of the most important innovations in Deep Learning. B
 ✔ Internal Covariate Shift slows down training in deep networks.
 ✔ Batch Normalization normalizes inputs to hidden layers.
 ✔ It uses the mini-batch mean and variance.
-✔ It introduces learnable parameters \( \gamma \) and \( \beta \) to restore network capacity.
+✔ It introduces learnable parameters $ \gamma $ and $ \beta $ to restore network capacity.
 ✔ It typically placed right before the activation function.
