@@ -52,7 +52,7 @@ As the image flows through the Feature Extractor:
 - **Spatial Dimensions (Width & Height) Shrink:** Due to pooling.
 - **Depth (Channels) Increases:** Because we use more filters in deeper layers (e.g., 32 -> 64 -> 128).
 
-At the end of the Feature Extractor, we no longer have an "image". We have a thick, small 3D block of numbers (e.g., $ 7 \times 7 \times 128 $) that perfectly describes the high-level features present in the image.
+At the end of the Feature Extractor, we no longer have an "image". We have a thick, small 3D block of numbers (e.g., $7 \times 7 \times 128$) that perfectly describes the high-level features present in the image.
 
 ### Part 2: The Classifier (Head)
 The second half of the network is a standard Artificial Neural Network (Multi-Layer Perceptron), exactly like the ones we studied in Unit 1.
@@ -64,7 +64,7 @@ Its job is to take the features extracted by Part 1 and learn which combinations
 # 3. The Bridge: The Flatten Layer
 
 There is a mechanical problem between Part 1 and Part 2.
-- The Feature Extractor outputs a **3D volume** (e.g., $ 7 \times 7 \times 128 $).
+- The Feature Extractor outputs a **3D volume** (e.g.,$7 \times 7 \times 128$).
 - The Classifier (ANN) strictly requires a **1D array** as input.
 
 To connect them, we must use a **Flatten Layer**.
@@ -72,9 +72,9 @@ To connect them, we must use a **Flatten Layer**.
 The Flatten Layer takes the 3D output of the final pooling layer and unrolls it into a single 1D column vector. 
 
 Example:
-If the final feature map is $ 7 \times 7 \times 128 $:
-Total numbers = $ 7 \times 7 \times 128 = 6,272 $.
-The Flatten layer outputs a 1D vector of length $ 6,272 $.
+If the final feature map is$7 \times 7 \times 128$:
+Total numbers =$7 \times 7 \times 128 = 6,272$.
+The Flatten layer outputs a 1D vector of length$6,272$.
 
 These 6,272 inputs are then fed into the Dense (Fully Connected) layers of the Classifier.
 

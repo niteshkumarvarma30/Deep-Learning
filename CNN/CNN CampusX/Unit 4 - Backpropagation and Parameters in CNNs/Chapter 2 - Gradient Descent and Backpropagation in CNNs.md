@@ -46,7 +46,7 @@ In a CNN, the learnable parameters are:
 2. The weights (filters) and biases in the **Convolutional layers (Feature Extractor)**.
 
 ### Step 1: Gradients through the Classifier
-Backpropagation starts at the Output layer. Using the Chain Rule, the network calculates the gradient of the Loss with respect to the weights in the Dense layers: $ \frac{\partial L}{\partial W} $.
+Backpropagation starts at the Output layer. Using the Chain Rule, the network calculates the gradient of the Loss with respect to the weights in the Dense layers: $\frac{\partial L}{\partial W}$.
 
 These weights are updated slightly to improve the prediction next time.
 
@@ -57,7 +57,7 @@ The error signal travels backward through the Dense layers until it hits the Fla
 The 3D error gradient now flows backward into the Pooling and Convolutional layers.
 
 - **Through Pooling:** For Max Pooling, the error is simply routed backward to the specific pixel that was the "Maximum" during the forward pass.
-- **Through Convolution:** The network calculates the gradient of the Loss with respect to the Filter Weights ($ \frac{\partial L}{\partial F} $). Because of Weight Sharing, the gradients for a specific filter are accumulated across all the spatial locations where that filter was applied.
+- **Through Convolution:** The network calculates the gradient of the Loss with respect to the Filter Weights ($\frac{\partial L}{\partial F}$). Because of Weight Sharing, the gradients for a specific filter are accumulated across all the spatial locations where that filter was applied.
 
 Finally, Gradient Descent subtracts these accumulated gradients from the filter's weights.
 
@@ -85,7 +85,7 @@ Filters begin with random weights. During training, the network makes a predicti
 ## Q2. How does Backpropagation handle Max Pooling layers since they have no weights?
 
 **Answer**
-While Pooling layers have no learnable parameters, they must still pass the error gradient backward. For Max Pooling, the network remembers which pixel in the $ 2 \times 2 $ window had the maximum value during the forward pass. During the backward pass, the entire error gradient is routed exclusively to that specific "winning" pixel, while the other 3 pixels receive a gradient of zero.
+While Pooling layers have no learnable parameters, they must still pass the error gradient backward. For Max Pooling, the network remembers which pixel in the$2 \times 2$ window had the maximum value during the forward pass. During the backward pass, the entire error gradient is routed exclusively to that specific "winning" pixel, while the other 3 pixels receive a gradient of zero.
 
 ---
 

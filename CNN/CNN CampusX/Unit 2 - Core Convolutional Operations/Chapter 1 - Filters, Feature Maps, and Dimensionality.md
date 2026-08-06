@@ -27,7 +27,7 @@ Instead, they use a completely different approach based on small matrices called
 
 A Filter is a small 2D grid of numbers (weights). 
 
-Usually, the size of a filter is $ 3 \times 3 $ or $ 5 \times 5 $. 
+Usually, the size of a filter is $3 \times 3$or$5 \times 5$. 
 
 These weights are not randomly updated; they are the **learnable parameters** of the CNN. The network learns what numbers to put inside the filter during backpropagation.
 
@@ -70,18 +70,18 @@ In mathematics, Convolution involves matrices. Therefore, we need to understand 
 
 ### Grayscale Images
 A grayscale image has only one color channel (light intensity).
-- **Dimension:** $ n \times n $ (e.g., $ 28 \times 28 $)
+- **Dimension:**$n \times n$(e.g.,$28 \times 28$)
 - **Channels:** 1
 
-When convolving a grayscale image, the filter must also be 2D: $ f \times f $ (e.g., $ 3 \times 3 $).
+When convolving a grayscale image, the filter must also be 2D:$f \times f$(e.g.,$3 \times 3$).
 
 ### RGB Color Images
 A color image has three color channels: Red, Green, and Blue.
-- **Dimension:** $ n \times n \times c $ (e.g., $ 64 \times 64 \times 3 $)
+- **Dimension:**$n \times n \times c$(e.g.,$64 \times 64 \times 3$)
 - **Channels ($c$):** 3
 
 When convolving a 3D color image, **the filter must have the same number of channels as the input**. 
-Therefore, the filter is a 3D volume: $ f \times f \times c $ (e.g., $ 3 \times 3 \times 3 $).
+Therefore, the filter is a 3D volume:$f \times f \times c$(e.g.,$3 \times 3 \times 3$).
 
 Even though the filter is 3D, applying it to a 3D image still produces a **2D Feature Map** (because the convolution sums the results across all channels).
 
@@ -96,10 +96,10 @@ A Filter (or Kernel) is a small grid of learnable weights used to detect a speci
 
 ---
 
-## Q2. If an input image has dimensions $ 224 \times 224 \times 3 $, what must be the depth (channels) of the filter?
+## Q2. If an input image has dimensions$224 \times 224 \times 3$, what must be the depth (channels) of the filter?
 
 **Answer**
-The filter must have exactly 3 channels to match the depth of the input image. Thus, a valid filter size would be $ 3 \times 3 \times 3 $.
+The filter must have exactly 3 channels to match the depth of the input image. Thus, a valid filter size would be$3 \times 3 \times 3$.
 
 ---
 
