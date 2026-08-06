@@ -78,14 +78,14 @@ This entire visual hierarchy is learned completely from scratch, driven purely b
 ## Q1. How do the filters in a CNN learn to detect edges and shapes?
 
 **Answer**
-Filters begin with random weights. During training, the network makes a prediction and calculates the error using a Loss Function. Through Backpropagation and the Chain Rule, the error gradient is passed backward through the Dense layers, un-flattened, and passed into the Convolutional layers. Gradient Descent then updates the filter weights. Over many epochs, these updates mold the random weights into precise feature detectors.
+Filters begin with random weights. During training, the network makes a prediction and calculates the error using a Loss Function. Through Backpropagation and the Chain Rule, the error gradient is passed backward through the Dense layers, un-flattens, and passes into the Convolutional layers. Gradient Descent then updates the filter weights. Over many epochs, these updates mold the random weights into precise feature detectors.
 
 ---
 
 ## Q2. How does Backpropagation handle Max Pooling layers since they have no weights?
 
 **Answer**
-While Pooling layers have no learnable parameters, they must still pass the error gradient backward. For Max Pooling, the network remembers which pixel in the$2 \times 2$ window had the maximum value during the forward pass. During the backward pass, the entire error gradient is routed exclusively to that specific "winning" pixel, while the other 3 pixels receive a gradient of zero.
+While Pooling layers have no learnable parameters, they must still pass the error gradient backward. For Max Pooling, the network remembers which pixel in the $2 \times 2$ window had the maximum value during the forward pass. During the backward pass, the entire error gradient is routed exclusively to that specific "winning" pixel, while the other 3 pixels receive a gradient of zero.
 
 ---
 

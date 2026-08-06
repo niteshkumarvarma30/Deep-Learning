@@ -25,7 +25,7 @@ However, they quickly realized that ANNs are fundamentally flawed when it comes 
 # 2. How Images are Processed in an ANN
 
 An image is just a grid of numbers (pixels).
-- A $28 \times 28$grayscale image has 784 pixels.
+- A $28 \times 28$ grayscale image has 784 pixels.
 - A standard ANN only accepts a 1D column vector as input.
 
 Therefore, to feed an image into an ANN, we must take the 2D grid and stretch it out into a single, long 1D line of pixels. This process is called **Flattening**.
@@ -55,9 +55,11 @@ Because the ANN treats every input as an independent variable, it completely los
 ## Limitation 2: Massive Computational Cost
 In a fully connected ANN, every input neuron must connect to every neuron in the first hidden layer.
 
-Suppose we have a modern RGB image of size$1000 \times 1000 \times 3$(1 million pixels per color channel).
-- **Total inputs:**$3,000,000$If our first hidden layer has just$1,000$neurons:
-- **Number of weights required:**$3,000,000 \times 1,000 = 3,000,000,000$ (3 Billion weights!)
+Suppose we have a modern RGB image of size $1000 \times 1000 \times 3$ (1 million pixels per color channel).
+- **Total inputs:** $3,000,000$
+
+If our first hidden layer has just $1,000$ neurons:
+- **Number of weights required:** $3,000,000 \times 1,000 = 3,000,000,000$ (3 Billion weights!)
 
 And that is just for the *first* layer. The computational cost and memory required to train billions of parameters for a simple image is impossible for standard hardware.
 

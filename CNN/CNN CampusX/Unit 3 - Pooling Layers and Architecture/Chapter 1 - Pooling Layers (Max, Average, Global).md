@@ -27,12 +27,15 @@ To solve this, we use **Pooling Layers**. Pooling is a down-sampling operation t
 
 # 2. How Pooling Works
 
-Pooling works very similarly to Convolution. We slide a small "window" (usually$2 \times 2$) across the feature map. However, instead of multiplying by weights, we simply perform a basic statistical operation on the numbers inside the window.
+Pooling works very similarly to Convolution. We slide a small "window" (usually $2 \times 2$) across the feature map. However, instead of multiplying by weights, we simply perform a basic statistical operation on the numbers inside the window.
 
 ### Standard Configuration
 The standard setup for a Pooling layer is:
-- **Window Size:**$2 \times 2$- **Stride:**$2$Because the Stride matches the window size, the window never overlaps. It perfectly halves the dimensions of the feature map.
-- A$64 \times 64$feature map becomes$32 \times 32$.
+- **Window Size:** $2 \times 2$
+- **Stride:** $2$
+
+Because the Stride matches the window size, the window never overlaps. It perfectly halves the dimensions of the feature map.
+- A $64 \times 64$ feature map becomes $32 \times 32$.
 
 ---
 
@@ -54,14 +57,14 @@ There are three main types of pooling operations:
 
 ### 1. Max Pooling (Most Common)
 Takes the **maximum value** from the window.
-- **Why it works:** In a feature map, a high value means the filter detected a strong feature. Max pooling guarantees that if a strong feature exists anywhere in that$2 \times 2$window, it will be preserved and passed to the next layer. It is excellent at capturing sharp details and edges.
+- **Why it works:** In a feature map, a high value means the filter detected a strong feature. Max pooling guarantees that if a strong feature exists anywhere in that $2 \times 2$ window, it will be preserved and passed to the next layer. It is excellent at capturing sharp details and edges.
 
 ### 2. Average Pooling
 Takes the **average value** of the window.
 - **Why it works:** It smooths the feature map, giving equal importance to all elements in the window. It is rarely used in the early layers today because it dilutes strong features, but it was common in older networks like LeNet-5.
 
 ### 3. Global Pooling
-Instead of a small$2 \times 2$window, Global Pooling looks at the **entire feature map** (e.g., the entire$7 \times 7$grid) and outputs a *single number* representing that entire channel.
+Instead of a small $2 \times 2$ window, Global Pooling looks at the **entire feature map** (e.g., the entire $7 \times 7$ grid) and outputs a *single number* representing that entire channel.
 - **Global Max Pooling:** Outputs the single largest number in the entire channel.
 - **Global Average Pooling:** Outputs the average of the entire channel. (This is heavily used in modern architectures like ResNet right before the final output layer to flatten the data).
 
@@ -92,6 +95,6 @@ Pooling is an aggressive down-sampling technique essential for managing the shee
 # Key Takeaways
 
 ✔ Pooling reduces Height and Width, but leaves Channels untouched.
-✔ A$2 \times 2$ pool with Stride 2 halves the spatial dimensions.
+✔ A $2 \times 2$ pool with Stride 2 halves the spatial dimensions.
 ✔ Pooling reduces computation and provides translation invariance.
 ✔ Max Pooling preserves the strongest features.
