@@ -95,11 +95,13 @@ decoder uses that representation to generate the output sequence.
 The model is trained to maximize the conditional probability of the
 target sequence given the input sequence:
 
-$ P(Y|X) $
+$$
+P(Y|X) $$
 
 For a sequence of output tokens:
 
-$ P(Y|X) = \prod_{t=1}^{T_y} P(y_t|y_{<t},X) $
+$$
+P(Y|X) = \prod_{t=1}^{T_y} P(y_t|y_{<t},X) $$
 
 where:
 
@@ -150,7 +152,8 @@ to compute the next hidden state.
 
 For a simplified RNN:
 
-$ \boxed{ h_t=f(W_{hh}h_{t-1}+W_{hx}x_t) } $
+$$
+\boxed{ h_t=f(W_{hh}h_{t-1}+W_{hx}x_t) } $$
 
 where:
 
@@ -189,7 +192,8 @@ represents a summary of the input.
 
 For the classical encoder--decoder architecture:
 
-$ \boxed{ \text{Context Vector}=h_T } $
+$$
+\boxed{ \text{Context Vector}=h_T } $$
 
 This vector is intended to encapsulate the information needed by the
 decoder.
@@ -216,13 +220,15 @@ The decoder generates the output sequence one token at a time.
 
 A simplified decoder recurrence is:
 
-$ \boxed{ h_t=f(W_{hh}h_{t-1}) } $
+$$
+\boxed{ h_t=f(W_{hh}h_{t-1}) } $$
 
 and the output is generated from the current decoder state.
 
 In an LSTM decoder, the hidden state and cell state are maintained:
 
-$ (h_t,c_t) = LSTM(y_{t-1},h_{t-1},c_{t-1}) $
+$$
+(h_t,c_t) = LSTM(y_{t-1},h_{t-1},c_{t-1}) $$
 
 The decoder begins with a start token:
 
@@ -271,7 +277,8 @@ followed by softmax.
 
 A simplified equation is:
 
-$ \boxed{ y_t=\text{softmax}(W_Sh_t) } $
+$$
+\boxed{ y_t=\text{softmax}(W_Sh_t) } $$
 
 Softmax converts the output scores into a probability distribution over
 the vocabulary.
@@ -301,9 +308,9 @@ once | upon | a | time
 
 Each word is converted into an embedding:
 
-$
+$$
 e_{\text{once}},e_{\text{upon}},e_{\text{a}},e_{\text{time}}
-$
+$$
 
 The encoder LSTM processes them sequentially:
 
@@ -316,21 +323,26 @@ The encoder LSTM processes them sequentially:
 
 For an LSTM:
 
-$ \boxed{ (h_t,c_t)=LSTM(x_t,h_{t-1},c_{t-1}) } $
+$$
+\boxed{ (h_t,c_t)=LSTM(x_t,h_{t-1},c_{t-1}) } $$
 
 After the last token:
 
-$ h_4,c_4 $
+$$
+h_4,c_4 $$
 
 represent the encoder's final state.
 
 The context can therefore be represented as:
 
-$ \boxed{ C=(h_4,c_4) } $
+$$
+\boxed{ C=(h_4,c_4) } $$
 
 The decoder can be initialized using these final encoder states:
 
-$ h_0^{dec}=h_4^{enc} $ c_0^{dec}=c_4^{enc} $
+$$
+h_0^{dec}=h_4^{enc} $$
+c_0^{dec}=c_4^{enc} $$
 
 This transfers the encoded sentence information from encoder to decoder.
 
@@ -357,11 +369,13 @@ Expected Output: il       était   une     fois
 
 So:
 
-$ \boxed{ \text{Training} \rightarrow \text{Ground-truth previous token} } $
+$$
+\boxed{ \text{Training} \rightarrow \text{Ground-truth previous token} } $$
 
 whereas during inference:
 
-$ \boxed{ \text{Inference} \rightarrow \text{Model's previous prediction} } $
+$$
+\boxed{ \text{Inference} \rightarrow \text{Model's previous prediction} } $$
 
 Teacher forcing helps stabilize and accelerate sequence learning.
 
@@ -474,15 +488,18 @@ of information called the **attention input** $C_i$.
 
 Without attention, the decoder can be thought of as using:
 
-$ y_{i-1},S_{i-1} $
+$$
+y_{i-1},S_{i-1} $$
 
 With attention, it additionally receives:
 
-$ C_i $
+$$
+C_i $$
 
 So:
 
-$ \boxed{ \text{Decoder input at timestep }i = (y_{i-1},S_{i-1},C_i) } $
+$$
+\boxed{ \text{Decoder input at timestep }i = (y_{i-1},S_{i-1},C_i) } $$
 
 The purpose of $C_i$ is to provide the decoder with the encoder
 information that is most useful for producing the current output.
@@ -495,21 +512,24 @@ $C_i$ is a **weighted combination of encoder hidden states**.
 
 Suppose the encoder produces:
 
-$ h_1,h_2,h_3,h_4 $
+$$
+h_1,h_2,h_3,h_4 $$
 
 and the attention mechanism assigns:
 
-$
+$$
 \alpha_{i1},\alpha_{i2},\alpha_{i3},\alpha_{i4}
-$
+$$
 
 Then:
 
-$ \boxed{ C_i = \alpha_{i1}h_1+ \alpha_{i2}h_2+ \alpha_{i3}h_3+ \alpha_{i4}h_4 } $
+$$
+\boxed{ C_i = \alpha_{i1}h_1+ \alpha_{i2}h_2+ \alpha_{i3}h_3+ \alpha_{i4}h_4 } $$
 
 or generally:
 
-$ \boxed{ C_i=\sum_j\alpha_{ij}h_j } $
+$$
+\boxed{ C_i=\sum_j\alpha_{ij}h_j } $$
 
 If the encoder hidden state has dimension $d_h$, then $C_i$ has the same
 dimension $d_h$, because it is a weighted sum of vectors of that
@@ -539,7 +559,9 @@ more strongly to $C_i$.
 The weights are often obtained by first calculating raw
 alignment/similarity scores and then normalizing them with softmax.
 
-$ e_{ij}=\text{alignment score} $ \boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $
+$$
+e_{ij}=\text{alignment score} $$
+\boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $$
 
 Therefore the complete dependency is:
 
@@ -577,7 +599,8 @@ Bahdanau Attention is also called **Additive Attention**.
 
 The key dependency is:
 
-$ \boxed{ e_{ij}=f(S_{i-1},h_j) } $
+$$
+\boxed{ e_{ij}=f(S_{i-1},h_j) } $$
 
 where:
 
@@ -594,30 +617,36 @@ ANN/alignment model.
 
 This is one of the most important concepts:
 
-$ \boxed{ S_{i-1},h_j \rightarrow e_{ij} \rightarrow \alpha_{ij} \rightarrow C_i } $
+$$
+\boxed{ S_{i-1},h_j \rightarrow e_{ij} \rightarrow \alpha_{ij} \rightarrow C_i } $$
 
 More explicitly:
 
 ### Step 1 --- Take decoder's previous hidden state
 
-$ S_{i-1} $
+$$
+S_{i-1} $$
 
 ### Step 2 --- Take an encoder hidden state
 
-$ h_j $
+$$
+h_j $$
 
 ### Step 3 --- Pass them to the alignment model
 
-$ e_{ij}=f(S_{i-1},h_j) $
+$$
+e_{ij}=f(S_{i-1},h_j) $$
 
 ### Step 4 --- Normalize the scores
 
-$ \alpha_{ij} = \frac{\exp$e_{ij}$}
-{\sum_k\exp(e_{ik})} $
+$$
+\alpha_{ij} = \frac{\exp$e_{ij}$}
+{\sum_k\exp(e_{ik})} $$
 
 ### Step 5 --- Calculate the attention input
 
-$ \boxed{ C_i=\sum_j\alpha_{ij}h_j } $
+$$
+\boxed{ C_i=\sum_j\alpha_{ij}h_j } $$
 
 So:
 
@@ -651,28 +680,36 @@ Weighted Encoder States
 
 Suppose the encoder has:
 
-$ h_1,h_2,h_3,h_4 $
+$$
+h_1,h_2,h_3,h_4 $$
 
 and the decoder is generating its $i$-th output.
 
 The decoder's previous state is:
 
-$ S_{i-1} $
+$$
+S_{i-1} $$
 
 We calculate:
 
-$ e_{i1}=f(S_{i-1},h_1) $ e_{i2}=f(S_{i-1},h_2) $ e_{i3}=f(S_{i-1},h_3) $ e_{i4}=f(S_{i-1},h_4) $
+$$
+e_{i1}=f(S_{i-1},h_1) $$
+e_{i2}=f(S_{i-1},h_2) $$
+e_{i3}=f(S_{i-1},h_3) $$
+e_{i4}=f(S_{i-1},h_4) $$
 
 Then:
 
-$\alpha_{i1},\alpha_{i2},\alpha_{i3},\alpha_{i4}$
-= \text{softmax} ($e_{i1},e_{i2},e_{i3},e_{i4}$)
-$
+$$
+\alpha_{i1},\alpha_{i2},\alpha_{i3},\alpha_{i4}$$
+= \text{softmax} ($$e_{i1},e_{i2},e_{i3},e_{i4}$$)
+$$
 
 Finally:
 
-$ C_i= \alpha_{i1}h_1+ \alpha_{i2}h_2+
-\alpha_{i3}h_3+ \alpha_{i4}h_4 $
+$$
+C_i= \alpha_{i1}h_1+ \alpha_{i2}h_2+
+\alpha_{i3}h_3+ \alpha_{i4}h_4 $$
 
 The largest (\alpha) causes the corresponding encoder hidden
 state to contribute most strongly.
@@ -703,16 +740,18 @@ neural network** and refers to it as the **alignment model**.
 
 Suppose:
 
-$ h_j\in\mathbb{R}^{1\times4} $
+$$
+h_j\in\mathbb{R}^{1\times4} $$
 
 and:
 
-$ S_{i-1}\in\mathbb{R}^{1\times4} $
+$$
+S_{i-1}\in\mathbb{R}^{1\times4} $$
 
 Concatenating them gives:
 
-$,S_{i-1};h_j,$ \in \mathbb{R}^{1\times8}
-$
+$$,S_{i-1};h_j,$$ \in \mathbb{R}^{1\times8}
+$$
 
 The source's example then considers an ANN with a hidden layer and
 output neuron that produces the alignment score.
@@ -783,15 +822,18 @@ important ways:
 
 Therefore, according to the provided material:
 
-$ \boxed{ e_{ij}=S_i^T h_j } $
+$$
+\boxed{ e_{ij}=S_i^T h_j } $$
 
 and:
 
-$ \boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $
+$$
+\boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $$
 
 Then:
 
-$ \boxed{ C_i=\sum_j\alpha_{ij}h_j } $
+$$
+\boxed{ C_i=\sum_j\alpha_{ij}h_j } $$
 
 ------------------------------------------------------------------------
 
@@ -799,25 +841,33 @@ $ \boxed{ C_i=\sum_j\alpha_{ij}h_j } $
 
 Suppose the encoder produces:
 
-$ h_1,h_2,h_3,h_4 $
+$$
+h_1,h_2,h_3,h_4 $$
 
 and the current decoder state is:
 
-$ S_i $
+$$
+S_i $$
 
 Calculate:
 
-$ e_{i1}=S_i^Th_1 $ e_{i2}=S_i^Th_2 $ e_{i3}=S_i^Th_3 $ e_{i4}=S_i^Th_4 $
+$$
+e_{i1}=S_i^Th_1 $$
+e_{i2}=S_i^Th_2 $$
+e_{i3}=S_i^Th_3 $$
+e_{i4}=S_i^Th_4 $$
 
 Then:
 
-$\alpha_{i1},\alpha_{i2},\alpha_{i3},\alpha_{i4}$
-= \text{softmax} ($e_{i1},e_{i2},e_{i3},e_{i4}$)
-$
+$$
+\alpha_{i1},\alpha_{i2},\alpha_{i3},\alpha_{i4}$$
+= \text{softmax} ($$e_{i1},e_{i2},e_{i3},e_{i4}$$)
+$$
 
 Finally:
 
-$ C_i= \sum_j\alpha_{ij}h_j $
+$$
+C_i= \sum_j\alpha_{ij}h_j $$
 
 The dot product measures how strongly the current decoder state is
 related to each encoder hidden state.
@@ -851,11 +901,14 @@ This distinction is extremely important.
 
 ### The most important difference
 
-$ \boxed{ \text{Bahdanau: } S_{i-1},h_j \rightarrow \alpha_{ij} } $ \boxed{ \text{Luong: } S_i,h_j \rightarrow \alpha_{ij} } $
+$$
+\boxed{ \text{Bahdanau: } S_{i-1},h_j \rightarrow \alpha_{ij} } $$
+\boxed{ \text{Luong: } S_i,h_j \rightarrow \alpha_{ij} } $$
 
 Then in both:
 
-$ \boxed{ \alpha_{ij} \rightarrow C_i } $
+$$
+\boxed{ \alpha_{ij} \rightarrow C_i } $$
 
 ------------------------------------------------------------------------
 
@@ -876,7 +929,8 @@ model.
 
 If two vectors are similar:
 
-$ S_i^Th_j $
+$$
+S_i^Th_j $$
 
 tends to be larger.
 
@@ -999,7 +1053,8 @@ Conceptually:
 
 Collectively, these form the input embedding matrix:
 
-$ E $
+$$
+E $$
 
 ------------------------------------------------------------------------
 
@@ -1028,11 +1083,13 @@ The original Transformer uses sinusoidal positional encoding.
 
 For even dimensions:
 
-$ \boxed{ PE_{(pos,2i)} = \sin \left( \frac{pos}{10000^{2i/d_{\text{model}}}} \right) } $
+$$
+\boxed{ PE_{(pos,2i)} = \sin \left( \frac{pos}{10000^{2i/d_{\text{model}}}} \right) } $$
 
 For odd dimensions:
 
-$ \boxed{ PE_{(pos,2i+1)} = \cos \left( \frac{pos}{10000^{2i/d_{\text{model}}}} \right) } $
+$$
+\boxed{ PE_{(pos,2i+1)} = \cos \left( \frac{pos}{10000^{2i/d_{\text{model}}}} \right) } $$
 
 where:
 
@@ -1048,7 +1105,8 @@ The input to the attention layer is not positional encoding alone.
 
 It is:
 
-$ \boxed{ X=E+PE } $
+$$
+\boxed{ X=E+PE } $$
 
 where:
 
@@ -1093,13 +1151,17 @@ the surrounding words.
 
 In self-attention:
 
-$ Q,K,V $
+$$
+Q,K,V $$
 
 are generated from the **same input source**.
 
 If the source is $X$:
 
-$ Q=XW_Q $ K=XW_K $ V=XW_V $
+$$
+Q=XW_Q $$
+K=XW_K $$
+V=XW_V $$
 
 Conceptually:
 
@@ -1120,7 +1182,8 @@ The three projections have different roles.
 
 ## Query
 
-$ Q $
+$$
+Q $$
 
 represents what a token is looking for.
 
@@ -1128,7 +1191,8 @@ represents what a token is looking for.
 
 ## Key
 
-$ K $
+$$
+K $$
 
 represents what a token can be matched by.
 
@@ -1136,7 +1200,8 @@ represents what a token can be matched by.
 
 ## Value
 
-$ V $
+$$
+V $$
 
 contains the information that is actually aggregated.
 
@@ -1144,7 +1209,10 @@ contains the information that is actually aggregated.
 
 Mathematically:
 
-$ \boxed{ Q=XW_Q } $ \boxed{ K=XW_K } $ \boxed{ V=XW_V } $
+$$
+\boxed{ Q=XW_Q } $$
+\boxed{ K=XW_K } $$
+\boxed{ V=XW_V } $$
 
 The matrices (W_Q,W_K,W_V) are learned during training.
 
@@ -1154,7 +1222,8 @@ The matrices (W_Q,W_K,W_V) are learned during training.
 
 The central Transformer attention equation is:
 
-$ \boxed{ \text{Attention}(Q,K,V) = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}} \right)V } $
+$$
+\boxed{ \text{Attention}(Q,K,V) = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}} \right)V } $$
 
 There are four conceptual steps.
 
@@ -1184,7 +1253,8 @@ Context-aware output
 
 ## 24.1 Step 1 --- (QK^T)
 
-$ QK^T $
+$$
+QK^T $$
 
 computes pairwise similarity between Queries and Keys.
 
@@ -1196,7 +1266,8 @@ Each column corresponds to a Key.
 
 ## 24.2 Step 2 --- Scaling
 
-$ \frac{QK^T}{\sqrt{d_k}} $
+$$
+\frac{QK^T}{\sqrt{d_k}} $$
 
 The scaling factor helps prevent dot-product values from becoming
 excessively large, which can make softmax too sharp and hurt gradient
@@ -1208,7 +1279,8 @@ behavior.
 
 For a vector (x):
 
-$ \boxed{ \text{softmax}(x_i) = \frac{e^{x_i}} {\sum_j e^{x_j}} } $
+$$
+\boxed{ \text{softmax}(x_i) = \frac{e^{x_i}} {\sum_j e^{x_j}} } $$
 
 Softmax converts the scores into normalized weights.
 
@@ -1220,7 +1292,8 @@ Each row sums to 1.
 
 The attention weights are multiplied by (V):
 
-$ \boxed{ Output=AttentionWeights\times V } $
+$$
+\boxed{ Output=AttentionWeights\times V } $$
 
 This produces a weighted aggregation of the Value vectors.
 
@@ -1233,7 +1306,8 @@ rather than a hard deletion of irrelevant information.
 
 Assume a two-token sequence and:
 
-$ d_k=2 $
+$$
+d_k=2 $$
 
 ------------------------------------------------------------------------
 
@@ -1241,36 +1315,40 @@ $ d_k=2 $
 
 Let:
 
-$ E=
+$$
+E=
 ```
 \begin{bmatrix}
 0.9&0.1\\
 0.1&0.9
 \end{bmatrix}
 ```
-$
+$$
 
 and:
 
-$ PE=
+$$
+PE=
 ```
 \begin{bmatrix}
 0.1&-0.1\\
 -0.1&0.1
 \end{bmatrix}
 ```
-$
+$$
 
 Then:
 
-$ X=E+PE $ X=
+$$
+X=E+PE $$
+X=
 ```
 \begin{bmatrix}
 1&0\\
 0&1
 \end{bmatrix}
 ```
-$
+$$
 
 The identity matrix is intentionally chosen to simplify the
 calculations.
@@ -1281,63 +1359,70 @@ calculations.
 
 Let:
 
-$ W_Q=
+$$
+W_Q=
 ```
 \begin{bmatrix}
 1&0\\
 0&1
 \end{bmatrix}
 ```
-$ W_K=
+$$
+W_K=
 ```
 \begin{bmatrix}
 1&0\\
 0&1
 \end{bmatrix}
 ```
-$ W_V=
+$$
+W_V=
 ```
 \begin{bmatrix}
 1&2\\
 3&4
 \end{bmatrix}
 ```
-$
+$$
 
 Then:
 
-$ Q=XW_Q =
+$$
+Q=XW_Q =
 ```
 \begin{bmatrix}
 1&0\\
 0&1
 \end{bmatrix}
 ```
-$ K=XW_K =
+$$
+K=XW_K =
 ```
 \begin{bmatrix}
 1&0\\
 0&1
 \end{bmatrix}
 ```
-$
+$$
 
 and:
 
-$ V=XW_V =
+$$
+V=XW_V =
 ```
 \begin{bmatrix}
 1&2\\
 3&4
 \end{bmatrix}
 ```
-$
+$$
 
 ------------------------------------------------------------------------
 
 ## Step 3 --- Calculate (QK^T)
 
-$ QK^T =
+$$
+QK^T =
 ```
 \begin{bmatrix}
 1&0\\
@@ -1348,9 +1433,9 @@ $ QK^T =
 0&1
 \end{bmatrix}
 ```
-$
+$$
 
-# $
+# $$
 
 ```
 \begin{bmatrix}
@@ -1358,7 +1443,7 @@ $
 0&1
 \end{bmatrix}
 ```
-$
+$$
 
 ------------------------------------------------------------------------
 
@@ -1366,18 +1451,21 @@ $
 
 Since:
 
-$ d_k=2 $ \sqrt{d_k}=\sqrt2\approx1.414 $
+$$
+d_k=2 $$
+\sqrt{d_k}=\sqrt2\approx1.414 $$
 
 Therefore:
 
-$ \frac{QK^T}{\sqrt{d_k}} \approx
+$$
+\frac{QK^T}{\sqrt{d_k}} \approx
 ```
 \begin{bmatrix}
 0.707&0\\
 0&0.707
 \end{bmatrix}
 ```
-$
+$$
 
 ------------------------------------------------------------------------
 
@@ -1385,23 +1473,24 @@ $
 
 For the first row:
 
-$0.707,0$
+$$0.707,0$$
 
 we obtain approximately:
 
-$0.67,0.33$
+$$0.67,0.33$$
 
 For the second row:
 
-$0,0.707$
+$$0,0.707$$
 
 we obtain:
 
-$0.33,0.67$
+$$0.33,0.67$$
 
 Therefore:
 
-$ \boxed{ A= \begin{bmatrix} 0.67&0.33\\ 0.33&0.67 \end{bmatrix} } $
+$$
+\boxed{ A= \begin{bmatrix} 0.67&0.33\\ 0.33&0.67 \end{bmatrix} } $$
 
 This is the attention-weight matrix.
 
@@ -1409,9 +1498,10 @@ This is the attention-weight matrix.
 
 ## Step 6 --- Multiply by V
 
-$ Output=AV $
+$$
+Output=AV $$
 
-# $
+# $$
 
 ```
 \begin{bmatrix}
@@ -1423,19 +1513,20 @@ $ Output=AV $
 3&4
 \end{bmatrix}
 ```
-$
+$$
 
 First row:
 
-$1.66,2.66$
+$$1.66,2.66$$
 
 Second row:
 
-$2.34,3.34$
+$$2.34,3.34$$
 
 Therefore:
 
-$ \boxed{ Output= \begin{bmatrix} 1.66&2.66\\ 2.34&3.34 \end{bmatrix} } $
+$$
+\boxed{ Output= \begin{bmatrix} 1.66&2.66\\ 2.34&3.34 \end{bmatrix} } $$
 
 This output contains representations formed by mixing information
 according to the learned attention weights.
@@ -1452,11 +1543,13 @@ relationships.
 
 For head $i$:
 
-$ \boxed{ head_i = \text{Attention} (QW_i^Q,KW_i^K,VW_i^V) } $
+$$
+\boxed{ head_i = \text{Attention} (QW_i^Q,KW_i^K,VW_i^V) } $$
 
 Then:
 
-$ \boxed{ \text{MultiHead}(Q,K,V) = \text{Concat} (head_1,\ldots,head_h)W^O } $
+$$
+\boxed{ \text{MultiHead}(Q,K,V) = \text{Concat} (head_1,\ldots,head_h)W^O } $$
 
 Conceptually:
 
@@ -1522,7 +1615,8 @@ This block is repeated (N) times.
 
 The initial input is:
 
-$ X=E+PE $
+$$
+X=E+PE $$
 
 This is passed to the first encoder block.
 
@@ -1541,8 +1635,9 @@ connection and normalized.
 
 A simplified expression is:
 
-$ Z= \text{LayerNorm} \left(
-X+\text{MHA}$X$ \right) $
+$$
+Z= \text{LayerNorm} \left(
+X+\text{MHA}$X$ \right) $$
 
 ------------------------------------------------------------------------
 
@@ -1550,7 +1645,8 @@ X+\text{MHA}$X$ \right) $
 
 A position-wise feed-forward network then processes the representation:
 
-$ FFN(x)=\sigma(xW_1+b_1)W_2+b_2 $
+$$
+FFN(x)=\sigma(xW_1+b_1)W_2+b_2 $$
 
 ------------------------------------------------------------------------
 
@@ -1558,8 +1654,9 @@ $ FFN(x)=\sigma(xW_1+b_1)W_2+b_2 $
 
 The result is again combined with its input and normalized:
 
-$ Output= \text{LayerNorm} \left( Z+FFN(Z)
-\right) $
+$$
+Output= \text{LayerNorm} \left( Z+FFN(Z)
+\right) $$
 
 The output is then passed to the next encoder block.
 
@@ -1646,7 +1743,8 @@ So:
 
 A conceptual mask is:
 
-$ M=
+$$
+M=
 ```
 \begin{bmatrix}
 0&-\infty&-\infty\\
@@ -1654,15 +1752,17 @@ $ M=
 0&0&0
 \end{bmatrix}
 ```
-$
+$$
 
 The attention becomes:
 
-$ \boxed{ \text{Attention} = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}}+M \right)V } $
+$$
+\boxed{ \text{Attention} = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}}+M \right)V } $$
 
 Because:
 
-$ e^{-\infty}=0 $
+$$
+e^{-\infty}=0 $$
 
 future positions receive zero attention probability.
 
@@ -1718,7 +1818,9 @@ I love cats
 
 Therefore:
 
-$ \boxed{ \text{Training → parallelized} } $ \boxed{ \text{Inference → autoregressive} } $
+$$
+\boxed{ \text{Training → parallelized} } $$
+\boxed{ \text{Inference → autoregressive} } $$
 
 ------------------------------------------------------------------------
 
@@ -1730,7 +1832,10 @@ This is where the Q/K/V source changes.
 
 In cross-attention:
 
-$ \boxed{ Q=X_{\text{decoder}}W_Q } $ \boxed{ K=X_{\text{encoder}}W_K } $ \boxed{ V=X_{\text{encoder}}W_V } $
+$$
+\boxed{ Q=X_{\text{decoder}}W_Q } $$
+\boxed{ K=X_{\text{encoder}}W_K } $$
+\boxed{ V=X_{\text{encoder}}W_V } $$
 
 Therefore:
 
@@ -1769,11 +1874,15 @@ The answer depends on the attention layer.
 
 The encoder has:
 
-$ X_{\text{encoder}} $
+$$
+X_{\text{encoder}} $$
 
 Then:
 
-$ Q=X_{\text{encoder}}W_Q $ K=X_{\text{encoder}}W_K $ V=X_{\text{encoder}}W_V $
+$$
+Q=X_{\text{encoder}}W_Q $$
+K=X_{\text{encoder}}W_K $$
+V=X_{\text{encoder}}W_V $$
 
 So:
 
@@ -1792,11 +1901,15 @@ This is **self-attention**.
 
 The decoder has its own representation:
 
-$ X_{\text{decoder}} $
+$$
+X_{\text{decoder}} $$
 
 Then:
 
-$ Q=X_{\text{decoder}}W_Q $ K=X_{\text{decoder}}W_K $ V=X_{\text{decoder}}W_V $
+$$
+Q=X_{\text{decoder}}W_Q $$
+K=X_{\text{decoder}}W_K $$
+V=X_{\text{decoder}}W_V $$
 
 All three still come from the same source.
 
@@ -1820,15 +1933,18 @@ Now two different sources are involved.
 
 ### Query
 
-$ \boxed{ Q=X_{\text{decoder}}W_Q } $
+$$
+\boxed{ Q=X_{\text{decoder}}W_Q } $$
 
 ### Key
 
-$ \boxed{ K=X_{\text{encoder}}W_K } $
+$$
+\boxed{ K=X_{\text{encoder}}W_K } $$
 
 ### Value
 
-$ \boxed{ V=X_{\text{encoder}}W_V } $
+$$
+\boxed{ V=X_{\text{encoder}}W_V } $$
 
 Therefore:
 
@@ -1856,8 +1972,9 @@ Not exactly.
 
 The expression:
 
-$ \text{softmax} \left(
-\frac{QK^T}{\sqrt{d_k}} \right)V $
+$$
+\text{softmax} \left(
+\frac{QK^T}{\sqrt{d_k}} \right)V $$
 
 is the output of an attention operation.
 
@@ -1911,11 +2028,13 @@ cross-attention layer.
 
 It becomes the source from which the decoder creates:
 
-$ K $
+$$
+K $$
 
 and:
 
-$ V $
+$$
+V $$
 
 for cross-attention.
 
@@ -2010,7 +2129,8 @@ Final Encoder Output
 
 Denote the final output as:
 
-$ X_{\text{encoder}} $
+$$
+X_{\text{encoder}} $$
 
 ------------------------------------------------------------------------
 
@@ -2103,51 +2223,72 @@ Next-token probabilities
 
 ## Classical Encoder
 
-$ \boxed{ h_t=f(W_{hh}h_{t-1}+W_{hx}x_t) } $
+$$
+\boxed{ h_t=f(W_{hh}h_{t-1}+W_{hx}x_t) } $$
 
 ## LSTM Encoder
 
-$ \boxed{ (h_t,c_t)=LSTM(x_t,h_{t-1},c_{t-1}) } $
+$$
+\boxed{ (h_t,c_t)=LSTM(x_t,h_{t-1},c_{t-1}) } $$
 
 ## Decoder Output
 
-$ \boxed{ y_t=\text{softmax}(W_Sh_t) } $
+$$
+\boxed{ y_t=\text{softmax}(W_Sh_t) } $$
 
 ## Attention Context
 
-$ \boxed{ C_i=\sum_j\alpha_{ij}h_j } $
+$$
+\boxed{ C_i=\sum_j\alpha_{ij}h_j } $$
 
 ## Bahdanau Alignment
 
-$ \boxed{ e_{ij}=f(S_{i-1},h_j) } $ \boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $ \boxed{ C_i=\sum_j\alpha_{ij}h_j } $
+$$
+\boxed{ e_{ij}=f(S_{i-1},h_j) } $$
+\boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $$
+\boxed{ C_i=\sum_j\alpha_{ij}h_j } $$
 
 ## Luong Alignment
 
-$ \boxed{ e_{ij}=S_i^Th_j } $ \boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $ \boxed{ C_i=\sum_j\alpha_{ij}h_j } $
+$$
+\boxed{ e_{ij}=S_i^Th_j } $$
+\boxed{ \alpha_{ij} = \text{softmax}$e_{ij}$ } $$
+\boxed{ C_i=\sum_j\alpha_{ij}h_j } $$
 
 ## Input Representation
 
-$ \boxed{ X=E+PE } $
+$$
+\boxed{ X=E+PE } $$
 
 ## Self-Attention Projections
 
-$ \boxed{ Q=XW_Q } $ \boxed{ K=XW_K } $ \boxed{ V=XW_V } $
+$$
+\boxed{ Q=XW_Q } $$
+\boxed{ K=XW_K } $$
+\boxed{ V=XW_V } $$
 
 ## Scaled Dot-Product Attention
 
-$ \boxed{ \text{Attention}(Q,K,V) = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}} \right)V } $
+$$
+\boxed{ \text{Attention}(Q,K,V) = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}} \right)V } $$
 
 ## Multi-Head Attention
 
-$ \boxed{ head_i= \text{Attention} (QW_i^Q,KW_i^K,VW_i^V) } $ \boxed{ \text{MultiHead} = \text{Concat} (head_1,\ldots,head_h)W^O } $
+$$
+\boxed{ head_i= \text{Attention} (QW_i^Q,KW_i^K,VW_i^V) } $$
+\boxed{ \text{MultiHead} = \text{Concat} (head_1,\ldots,head_h)W^O } $$
 
 ## Masked Attention
 
-$ \boxed{ \text{Attention} = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}}+M \right)V } $
+$$
+\boxed{ \text{Attention} = \text{softmax} \left( \frac{QK^T}{\sqrt{d_k}}+M \right)V } $$
 
 ## Cross-Attention
 
-$ \boxed{ Q=X_{\text{decoder}}W_Q } $ \boxed{ K=X_{\text{encoder}}W_K } $ \boxed{ V=X_{\text{encoder}}W_V } $
+$$
+\boxed{ Q=X_{\text{decoder}}W_Q } $$
+\boxed{ K=X_{\text{encoder}}W_K } $$
+\boxed{ V=X_{\text{encoder}}W_V } $$
 
 ------------------------------------------------------------------------
 
@@ -2217,7 +2358,8 @@ explicit word-to-word alignment.
 Attention allows the decoder to access all encoder hidden states and
 dynamically determine which ones are important for the current output.
 
-$ C_i=\sum_j\alpha_{ij}h_j $
+$$
+C_i=\sum_j\alpha_{ij}h_j $$
 
 ------------------------------------------------------------------------
 
@@ -2226,18 +2368,21 @@ $ C_i=\sum_j\alpha_{ij}h_j $
 The alignment score depends on the **previous decoder hidden state** and
 the encoder hidden state:
 
-$ \boxed{ e_{ij}=f(S_{i-1},h_j) } $
+$$
+\boxed{ e_{ij}=f(S_{i-1},h_j) } $$
 
 The score is calculated using a learned ANN/alignment model.
 
 Then:
 
-$ e_{ij} \rightarrow \alpha_{ij} \rightarrow
-C_i $
+$$
+e_{ij} \rightarrow \alpha_{ij} \rightarrow
+C_i $$
 
 where:
 
-$ C_i=\sum_j\alpha_{ij}h_j $
+$$
+C_i=\sum_j\alpha_{ij}h_j $$
 
 ------------------------------------------------------------------------
 
@@ -2246,14 +2391,16 @@ $ C_i=\sum_j\alpha_{ij}h_j $
 The alignment score depends on the **current decoder hidden state** and
 encoder hidden state:
 
-$ \boxed{ e_{ij}=S_i^Th_j } $
+$$
+\boxed{ e_{ij}=S_i^Th_j } $$
 
 The dot product provides the similarity score.
 
 Then:
 
-$ e_{ij} \rightarrow \alpha_{ij} \rightarrow
-C_i $
+$$
+e_{ij} \rightarrow \alpha_{ij} \rightarrow
+C_i $$
 
 ------------------------------------------------------------------------
 
@@ -2261,11 +2408,13 @@ C_i $
 
 In self-attention:
 
-$ Q,K,V $
+$$
+Q,K,V $$
 
 come from the same input source:
 
-$ Q=XW_Q,\quad K=XW_K,\quad V=XW_V $
+$$
+Q=XW_Q,\quad K=XW_K,\quad V=XW_V $$
 
 ------------------------------------------------------------------------
 
@@ -2273,7 +2422,8 @@ $ Q=XW_Q,\quad K=XW_K,\quad V=XW_V $
 
 In decoder masked self-attention:
 
-$ Q,K,V $
+$$
+Q,K,V $$
 
 all come from the decoder, but future tokens are masked.
 
@@ -2283,7 +2433,9 @@ all come from the decoder, but future tokens are masked.
 
 In decoder cross-attention:
 
-$ \boxed{ Q\leftarrow Decoder } $ \boxed{ K,V\leftarrow Encoder } $
+$$
+\boxed{ Q\leftarrow Decoder } $$
+\boxed{ K,V\leftarrow Encoder } $$
 
 This is how the decoder accesses the encoder's representation of the
 input sequence.
@@ -2296,31 +2448,38 @@ If you remember only three things, remember these.
 
 ## Bahdanau
 
-$ \boxed{ S_{i-1},h_j \rightarrow e_{ij} \rightarrow \alpha_{ij} \rightarrow C_i } $
+$$
+\boxed{ S_{i-1},h_j \rightarrow e_{ij} \rightarrow \alpha_{ij} \rightarrow C_i } $$
 
 with:
 
-$ e_{ij}=f(S_{i-1},h_j) $
+$$
+e_{ij}=f(S_{i-1},h_j) $$
 
 ------------------------------------------------------------------------
 
 ## Luong
 
-$ \boxed{ S_i,h_j \rightarrow e_{ij} \rightarrow \alpha_{ij} \rightarrow C_i } $
+$$
+\boxed{ S_i,h_j \rightarrow e_{ij} \rightarrow \alpha_{ij} \rightarrow C_i } $$
 
 with:
 
-$ e_{ij}=S_i^Th_j $
+$$
+e_{ij}=S_i^Th_j $$
 
 ------------------------------------------------------------------------
 
 ## Transformer Self-Attention
 
-$ \boxed{ X \rightarrow Q,K,V \rightarrow QK^T \rightarrow \frac{QK^T}{\sqrt{d_k}} \rightarrow Softmax \rightarrow Attention\ Weights \rightarrow V \rightarrow Output } $
+$$
+\boxed{ X \rightarrow Q,K,V \rightarrow QK^T \rightarrow \frac{QK^T}{\sqrt{d_k}} \rightarrow Softmax \rightarrow Attention\ Weights \rightarrow V \rightarrow Output } $$
 
 And for Transformer cross-attention:
 
-$ \boxed{ X_{\text{decoder}}\rightarrow Q } $ \boxed{ X_{\text{encoder}}\rightarrow K,V } $
+$$
+\boxed{ X_{\text{decoder}}\rightarrow Q } $$
+\boxed{ X_{\text{encoder}}\rightarrow K,V } $$
 
 These distinctions form the conceptual bridge from classical
 sequence-to-sequence models to modern Transformer architectures.
