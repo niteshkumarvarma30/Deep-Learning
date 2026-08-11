@@ -78,9 +78,10 @@ For our `dummy_image` (n = 32):
 - $p = 0$
 - $s = 1$
 
-$$ 
-O = \lfloor \frac{32 - 3 + 2(0)}{1} \rfloor + 1 = 29 + 1 = 30 
 $$
+O = \lfloor \frac{32 - 3 + 2(0)}{1} \rfloor + 1 = 29 + 1 = 30
+$$
+
 Output: **30x30**
 
 ### Example Calculation for MaxPool2d:
@@ -89,7 +90,8 @@ For our `feature_maps` (n = 30):
 - $p = 0$
 - $s = 2$
 
-$$ 
-O = \lfloor \frac{30 - 2 + 2(0)}{2} \rfloor + 1 = \lfloor \frac{28}{2} \rfloor + 1 = 14 + 1 = 15 
 $$
+O = \lfloor \frac{30 - 2 + 2(0)}{2} \rfloor + 1 = \lfloor \frac{28}{2} \rfloor + 1 = 14 + 1 = 15
+$$
+
 Output: **15x15**
