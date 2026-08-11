@@ -63,29 +63,33 @@ When designing CNNs, you constantly need to calculate what the output dimensions
 
 The universal formula to calculate the output dimension $O$ for a given dimension $W$ (Width or Height) is:
 
-$$ O = \lfloor \frac{W - K + 2P}{S} \rfloor + 1 $$
+$$ O = \lfloor \frac{n - f + 2p}{s} \rfloor + 1 $$
 
 Where:
-- $W$ = Input Size (Width or Height)
-- $K$ = Kernel Size (`kernel_size`)
-- $P$ = Padding (`padding`, default is 0)
-- $S$ = Stride (`stride`, default is 1 for Conv2d, and equal to Kernel Size for MaxPool)
+- $n$ = Input Size (Width or Height)
+- $f$ = Filter / Kernel Size (`kernel_size`)
+- $p$ = Padding (`padding`, default is 0)
+- $s$ = Stride (`stride`, default is 1 for Conv2d, and equal to Kernel Size for MaxPool)
 - $\lfloor \dots \rfloor$ means "round down to the nearest integer"
 
 ### Example Calculation for Conv2d:
-For our `dummy_image` (W = 32):
-- $K = 3$
-- $P = 0$
-- $S = 1$
+For our `dummy_image` (n = 32):
+- $f = 3$
+- $p = 0$
+- $s = 1$
 
-$$ O = \lfloor \frac{32 - 3 + 2(0)}{1} \rfloor + 1 = 29 + 1 = 30 $$
+$$ 
+O = \lfloor \frac{32 - 3 + 2(0)}{1} \rfloor + 1 = 29 + 1 = 30 
+$$
 Output: **30x30**
 
 ### Example Calculation for MaxPool2d:
-For our `feature_maps` (W = 30):
-- $K = 2$
-- $P = 0$
-- $S = 2$
+For our `feature_maps` (n = 30):
+- $f = 2$
+- $p = 0$
+- $s = 2$
 
-$$ O = \lfloor \frac{30 - 2 + 2(0)}{2} \rfloor + 1 = \lfloor \frac{28}{2} \rfloor + 1 = 14 + 1 = 15 $$
+$$ 
+O = \lfloor \frac{30 - 2 + 2(0)}{2} \rfloor + 1 = \lfloor \frac{28}{2} \rfloor + 1 = 14 + 1 = 15 
+$$
 Output: **15x15**
