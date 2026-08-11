@@ -1,0 +1,6 @@
+# Ignore MNIST Dataset
+data/
+
+# Ignore PyTorch model weights
+*.pth
+*.pt
