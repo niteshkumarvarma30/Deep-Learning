@@ -6,9 +6,9 @@
 
 ---
 
-# Introduction
+## Introduction
 
-One of the biggest realizations in Machine Learning and Deep Learning is that
+One of the biggest realizations in Machine Learning and Deep Learning is:
 
 > **Binary Cross Entropy (BCE) is exactly the same loss function that is derived in Logistic Regression using Maximum Likelihood Estimation (MLE).**
 
@@ -18,84 +18,72 @@ It is **not**.
 
 Deep Learning simply reuses the same mathematical result obtained from Logistic Regression.
 
-The only difference is the **context**.
+The only difference is the context:
 
-- **Logistic Regression** derives BCE using Probability Theory and Maximum Likelihood Estimation.
-- **Deep Learning** directly uses BCE as the loss function for training binary neural networks.
+- **Logistic Regression:** Derives BCE using Probability Theory and Maximum Likelihood Estimation.
+- **Deep Learning:** Directly uses BCE as the loss function for training binary neural networks.
 
 ---
 
-# The Big Picture
+## The Big Picture
 
 ```text
 Logistic Regression
-
-↓
-
+        |
+        v
 Probability Theory
-
-↓
-
+        |
+        v
 Likelihood Function
-
-↓
-
+        |
+        v
 Maximum Likelihood Estimation (MLE)
-
-↓
-
+        |
+        v
 Log Likelihood
-
-↓
-
+        |
+        v
 Negative Log Likelihood (NLL)
-
-↓
-
+        |
+        v
 Binary Cross Entropy (BCE)
-
-↓
-
+        |
+        v
 Deep Learning uses the same BCE loss
 ```
 
 ---
 
-# Step 1 — Logistic Regression Predicts a Probability
+## Step 1 – Logistic Regression Predicts a Probability
 
-Logistic Regression first computes the linear equation
-
-$$
-z=w^Tx+b
-$$
-
-where
-
-- \(w\) = Weight Vector
-- \(x\) = Input Features
-- \(b\) = Bias
-
-This value is passed through the Sigmoid function.
+Logistic Regression first computes the linear equation:
 
 $$
-\hat y
-=
-\sigma(z)
-=
-\frac{1}{1+e^{-z}}
+z = w^T x + b
 $$
 
-where
+Where:
 
-- \(\hat y\) = Predicted Probability
+- $w$ = Weight Vector.
+- $x$ = Input Features.
+- $b$ = Bias.
 
-Example
+This value is passed through the Sigmoid function:
+
+$$
+\hat{y} = \sigma(z) = \frac{1}{1+e^{-z}}
+$$
+
+Where:
+
+- $\hat{y}$ = Predicted Probability.
+
+### Example
 
 ```text
 ŷ = 0.92
-
-↓
-
+    |
+    v
 92% probability that the sample belongs to Class 1
 ```
 
@@ -103,148 +91,121 @@ Notice that Logistic Regression predicts a **probability**, not a class label.
 
 ---
 
-# Step 2 — Build the Probability Model
+## Step 2 – Build the Probability Model
 
-Suppose
+Suppose the target variable has two possible values:
 
 $$
-y\in\{0,1\}
+y \in \{0,1\}
 $$
 
 There are two possible cases.
 
-## Case 1
+### Case 1 – When y = 1
 
-If
-
-$$
-y=1
-$$
-
-then
+If:
 
 $$
-P(y=1)=\hat y
+y = 1
 $$
 
----
-
-## Case 2
-
-If
+Then:
 
 $$
-y=0
+P(y=1) = \hat{y}
 $$
 
-then
+### Case 2 – When y = 0
+
+If:
 
 $$
-P(y=0)=1-\hat y
+y = 0
 $$
 
-Instead of writing two separate equations,
-
-both cases are combined into one elegant equation.
+Then:
 
 $$
-P(y)
-=
-\hat y^{\,y}
-(1-\hat y)^{1-y}
+P(y=0) = 1-\hat{y}
+$$
+
+Instead of writing two separate equations, both cases can be combined into one equation:
+
+$$
+P(y) = \hat{y}^{\,y}(1-\hat{y})^{1-y}
 $$
 
 This single equation works for both classes.
 
----
+### Why Does This Equation Work?
 
-# Why Does This Equation Work?
-
-### When \(y=1\)
+**When y = 1:**
 
 $$
-P(y)
-=
-\hat y^1
-(1-\hat y)^0
-=
-\hat y
+P(y) = \hat{y}^1(1-\hat{y})^0
 $$
 
----
-
-### When \(y=0\)
-
 $$
-P(y)
-=
-\hat y^0
-(1-\hat y)^1
-=
-1-\hat y
+P(y) = \hat{y}
 $$
 
-Thus,
+**When y = 0:**
 
-the same equation correctly represents both possible outcomes.
+$$
+P(y) = \hat{y}^0(1-\hat{y})^1
+$$
+
+$$
+P(y) = 1-\hat{y}
+$$
+
+Thus, the same equation correctly represents both possible outcomes.
 
 ---
 
-# Step 3 — Maximum Likelihood Estimation (MLE)
+## Step 3 – Maximum Likelihood Estimation (MLE)
 
-The goal of Maximum Likelihood Estimation is
+The goal of Maximum Likelihood Estimation is:
 
 > **Find the weights and bias that make the observed training data most probable.**
 
-For one training example,
-
-the likelihood is
+For one training example, the likelihood is:
 
 $$
-L
-=
-\hat y^{\,y}
-(1-\hat y)^{1-y}
+L = \hat{y}^{\,y}(1-\hat{y})^{1-y}
 $$
 
-For \(n\) training examples,
-
-the total likelihood becomes
+For $n$ independent training examples, the total likelihood becomes:
 
 $$
-L
-=
-\prod_{i=1}^{n}
-\hat y_i^{\,y_i}
-(1-\hat y_i)^{1-y_i}
+L = \prod_{i=1}^{n}
+\hat{y}_i^{\,y_i}
+(1-\hat{y}_i)^{1-y_i}
 $$
 
-Our objective is
+Our objective is:
 
 $$
-\boxed{
-\text{Maximize Likelihood}
-}
+\boxed{\text{Maximize Likelihood}}
 $$
 
 ---
 
-# Step 4 — Take the Log Likelihood
+## Step 4 – Take the Log Likelihood
 
 The likelihood contains a product.
 
-Products are difficult to optimize.
+Products are difficult to optimize directly.
 
-Using the logarithm converts products into sums.
+Using the logarithm converts products into sums:
 
 $$
-\log L
-=
+\log L =
 \sum_{i=1}^{n}
 \left[
-y_i\log(\hat y_i)
+y_i\log(\hat{y}_i)
 +
-(1-y_i)\log(1-\hat y_i)
+(1-y_i)\log(1-\hat{y}_i)
 \right]
 $$
 
@@ -252,464 +213,382 @@ This simplifies optimization considerably.
 
 ---
 
-# Step 5 — Convert Maximization into Minimization
+## Step 5 – Convert Maximization into Minimization
 
 Maximum Likelihood Estimation is a **maximization** problem.
 
-However,
+However, Gradient Descent is a **minimization** algorithm.
 
-Gradient Descent is a **minimization** algorithm.
-
-Therefore,
-
-multiply the objective by **−1**.
+Therefore, multiply the objective by $-1$:
 
 $$
--\log L = - \sum_{i=1}^{n} \left[ y_i\log(\hat y_i) + (1-y_i)\log(1-\hat y_i) \right]
+-\log L =
+-\sum_{i=1}^{n}
+\left[
+y_i\log(\hat{y}_i)
++
+(1-y_i)\log(1-\hat{y}_i)
+\right]
 $$
 
-Now divide by the number of training samples.
+Now divide by the number of training samples:
 
 $$
-\boxed{ J = - \frac1n \sum_{i=1}^{n} \left[ y_i\log(\hat y_i) + (1-y_i)\log(1-\hat y_i) \right] }
+\boxed{
+J =
+-\frac{1}{n}
+\sum_{i=1}^{n}
+\left[
+y_i\log(\hat{y}_i)
++
+(1-y_i)\log(1-\hat{y}_i)
+\right]
+}
 $$
 
-This is exactly the
-
-# Binary Cross Entropy (BCE)
+This is exactly the **Binary Cross Entropy (BCE)** loss function.
 
 ---
 
-# The Complete Derivation
+## The Complete Derivation
 
 ```text
 Logistic Regression
-
-↓
-
+        |
+        v
 Sigmoid Function
-
-↓
-
+        |
+        v
 Predicted Probability
-
-↓
-
+        |
+        v
 Likelihood Function
-
-↓
-
+        |
+        v
 Maximum Likelihood Estimation (MLE)
-
-↓
-
+        |
+        v
 Log Likelihood
-
-↓
-
+        |
+        v
 Negative Log Likelihood (NLL)
-
-↓
-
+        |
+        v
 Binary Cross Entropy (BCE)
 ```
 
 ---
 
-# Why Doesn't Deep Learning Re-Derive It?
+## Why Doesn't Deep Learning Re-Derive It?
 
-In Logistic Regression,
+In Logistic Regression, you learn:
 
-you learn
+- Probability Theory.
+- Likelihood Function.
+- Maximum Likelihood Estimation.
+- Log Likelihood.
+- Negative Log Likelihood.
+- Binary Cross Entropy Derivation.
 
-- Probability Theory
-- Likelihood Function
-- Maximum Likelihood Estimation
-- Log Likelihood
-- Negative Log Likelihood
-- Binary Cross Entropy Derivation
+Once this derivation is completed, there is no need to derive it again.
 
-Once this derivation is completed,
-
-there is no need to derive it again.
-
-Deep Learning simply says
+Deep Learning simply uses:
 
 ```text
 Binary Classification
-
-↓
-
+        |
+        v
 Sigmoid Activation
-
-↓
-
+        |
+        v
 Binary Cross Entropy Loss
 ```
 
-because BCE has already been mathematically justified through Maximum Likelihood Estimation.
+BCE has already been mathematically justified through Maximum Likelihood Estimation.
 
 ---
 
-# Logistic Regression is Actually a Neural Network
+## Logistic Regression Is Actually a Neural Network
 
-A very interesting fact is
+A very interesting fact is:
 
-> **Logistic Regression is simply a Neural Network with no hidden layers.**
+> **Logistic Regression is simply a neural network with no hidden layers.**
 
----
-
-## Logistic Regression
+### Logistic Regression
 
 ```text
 Input Features
-
-↓
-
+      |
+      v
 Weighted Sum
-
-↓
-
+      |
+      v
 Sigmoid
-
-↓
-
+      |
+      v
 Binary Cross Entropy
-
-↓
-
+      |
+      v
 Gradient Descent
 ```
 
----
-
-## Binary Neural Network
+### Binary Neural Network
 
 ```text
 Input Features
-
-↓
-
+      |
+      v
 Hidden Layer(s)
-
-↓
-
+      |
+      v
 Output Neuron
-
-↓
-
+      |
+      v
 Sigmoid
-
-↓
-
+      |
+      v
 Binary Cross Entropy
-
-↓
-
+      |
+      v
 Backpropagation
-
-↓
-
+      |
+      v
 Gradient Descent
 ```
 
-Notice
+Notice that the following remain the same:
 
-The
+- Sigmoid Function.
+- Binary Cross Entropy.
 
-- Sigmoid Function
-- Binary Cross Entropy
-
-remain exactly the same.
-
-The only difference is the addition of hidden layers.
+The main architectural difference is the addition of hidden layers.
 
 ---
 
-# Does Deep Learning Compute the Likelihood Function Internally?
+## Does Deep Learning Compute the Likelihood Function Internally?
 
-Many students ask
+Many students ask:
 
 > "When we use Binary Cross Entropy, does Deep Learning first compute the Likelihood Function?"
 
-The answer is
+The answer is:
 
-> **Yes mathematically, but No computationally.**
+> **Yes mathematically, but no computationally.**
 
----
+### Important Clarification
 
-# Important Clarification
-
-Deep Learning does **not** perform
+Deep Learning does not separately perform the following sequence during every training iteration:
 
 ```text
 Likelihood
-
-↓
-
+    |
+    v
 Log Likelihood
-
-↓
-
+    |
+    v
 Negative Log Likelihood
-
-↓
-
+    |
+    v
 Binary Cross Entropy
 ```
 
-during every training iteration.
+Instead, the Binary Cross Entropy formula already contains the entire mathematical derivation.
 
-Instead,
-
-the Binary Cross Entropy formula already **contains** the entire derivation.
-
-The likelihood mathematics is already built into the BCE formula.
+The likelihood mathematics is already incorporated into the BCE formula.
 
 ---
 
-# Think of It Like This
+## Think of It Like This
 
-During Logistic Regression,
-
-we derived
+During Logistic Regression, we derive:
 
 ```text
 Likelihood
-
-↓
-
+    |
+    v
 Log Likelihood
-
-↓
-
+    |
+    v
 Negative Log Likelihood
-
-↓
-
+    |
+    v
 Binary Cross Entropy
 ```
 
-After the derivation,
+After the derivation, Binary Cross Entropy becomes the final mathematical formula.
 
-Binary Cross Entropy becomes the final mathematical formula.
-
-During Deep Learning,
-
-the framework directly computes
+During Deep Learning, the framework directly computes:
 
 $$
-L = - \left[ y\log(\hat y) + (1-y)\log(1-\hat y) \right]
+L =
+-\left[
+y\log(\hat{y})
++
+(1-y)\log(1-\hat{y})
+\right]
 $$
 
-It does **not** separately compute
+It does not separately compute:
 
-- Likelihood
-- Log Likelihood
-- Negative Log
+- Likelihood.
+- Log Likelihood.
+- Negative Log Likelihood.
 
-because these operations have already been mathematically combined.
+These operations have already been mathematically combined into the BCE objective.
 
 ---
 
-# What Happens Internally?
+## What Happens Internally?
 
-When we write
+When we write:
 
 ```python
 loss = BCELoss(prediction, target)
 ```
 
-Conceptually,
-
-the framework performs
+Conceptually, the framework performs:
 
 ```text
 Prediction
-
-↓
-
+    |
+    v
 Binary Cross Entropy Formula
-
-↓
-
+    |
+    v
 Loss Value
 ```
 
-It does **not** internally execute
+It does not need to separately execute:
 
 ```text
 Likelihood
-
-↓
-
+    |
+    v
 Log Likelihood
-
-↓
-
-Negative Log
-
-↓
-
+    |
+    v
+Negative Log Likelihood
+    |
+    v
 Loss
 ```
 
-because BCE is already the simplified mathematical result.
+BCE is already the simplified mathematical result.
 
 ---
 
-# Analogy
+## Analogy
 
-Suppose you know the identity
+Suppose you know the mathematical identity:
 
 $$
-(a+b)^2
-=
-a^2+2ab+b^2
+(a+b)^2 = a^2+2ab+b^2
 $$
 
-Later,
-
-if you write
+Later, if you write:
 
 ```python
-(a+b)**2
+(a + b) ** 2
 ```
 
-Python does **not**
+Python does not derive the identity or manually expand the equation every time.
 
-- derive the identity,
-- expand the equation,
-
-every time.
-
-It simply evaluates
+It simply evaluates:
 
 $$
 (a+b)^2
 $$
 
-Similarly,
+Similarly, Deep Learning frameworks do not derive Maximum Likelihood Estimation during every training iteration.
 
-Deep Learning frameworks do **not** derive Maximum Likelihood Estimation every iteration.
-
-They directly evaluate the Binary Cross Entropy formula.
+They directly evaluate the Binary Cross Entropy objective.
 
 ---
 
-# Mathematical Derivation vs Training Pipeline
+## Mathematical Derivation vs Training Pipeline
 
-## Mathematical Derivation
+### 1. Mathematical Derivation
 
 ```text
 Probability Model
-
-↓
-
+       |
+       v
 Likelihood Function
-
-↓
-
+       |
+       v
 Maximum Likelihood Estimation
-
-↓
-
+       |
+       v
 Log Likelihood
-
-↓
-
+       |
+       v
 Negative Log Likelihood
-
-↓
-
+       |
+       v
 Binary Cross Entropy Formula
 ```
 
-This derivation is performed once during mathematical analysis.
+This derivation establishes the mathematical objective.
 
----
-
-## Actual Deep Learning Training
+### 2. Actual Deep Learning Training
 
 ```text
 Input
-
-↓
-
+  |
+  v
 Forward Propagation
-
-↓
-
+  |
+  v
 Sigmoid
-
-↓
-
+  |
+  v
 Predicted Probability
-
-↓
-
+  |
+  v
 Binary Cross Entropy Formula
-
-↓
-
+  |
+  v
 Loss
-
-↓
-
+  |
+  v
 Backpropagation
-
-↓
-
+  |
+  v
 Gradient Descent
-
-↓
-
+  |
+  v
 Update Weights
 ```
 
-Notice
-
-The **Likelihood Function does not explicitly appear** because it has already been incorporated into the BCE formula.
+Notice that the Likelihood Function does not explicitly appear because it has already been incorporated into the BCE formula.
 
 ---
 
-# The Deep Mathematical Truth
+## The Deep Mathematical Truth
 
-The real optimization objective has **never changed**.
+The underlying optimization objective has never changed.
 
-Originally,
-
-Maximum Likelihood Estimation wanted to
+Originally, Maximum Likelihood Estimation wanted to:
 
 $$
-\boxed{
-\text{Maximize Likelihood}
-}
+\boxed{\text{Maximize Likelihood}}
 $$
 
-However,
+However, Gradient Descent minimizes objective functions.
 
-Gradient Descent minimizes objective functions.
-
-Therefore,
-
-we instead minimize
+Therefore, we instead minimize:
 
 $$
-\boxed{
--\log(\text{Likelihood})
-}
+\boxed{-\log(\text{Likelihood})}
 $$
 
-Since
+Since:
 
 $$
--\log(\text{Likelihood})
-=
-\text{Binary Cross Entropy}
+-\log(\text{Likelihood}) = \text{Binary Cross Entropy}
 $$
 
-we obtain
+We obtain:
 
 $$
 \boxed{
@@ -721,112 +600,97 @@ $$
 }
 $$
 
-These three optimization objectives are mathematically identical.
+These three optimization objectives are mathematically equivalent.
 
 ---
 
-# Mental Model
+## Mental Model
 
-You can remember the relationship as
+You can remember the relationship as follows:
 
 ```text
 Linear Regression
-
-↓
-
+       |
+       v
 Mean Squared Error (MSE)
 
 --------------------------------
 
 Logistic Regression
-
-↓
-
+       |
+       v
 Binary Cross Entropy (BCE)
 
 --------------------------------
 
 Binary Neural Network
-
-↓
-
+       |
+       v
 Sigmoid
-
-↓
-
+       |
+       v
 Binary Cross Entropy (BCE)
 
 --------------------------------
 
 Multi-class Neural Network
-
-↓
-
+       |
+       v
 Softmax
-
-↓
-
+       |
+       v
 Categorical Cross Entropy (CCE)
 ```
 
 ---
 
-# Logistic Regression vs Binary Neural Network
+## Logistic Regression vs Binary Neural Network
 
-| Logistic Regression | Binary Neural Network |
-|---------------------|----------------------|
-| No Hidden Layers | One or More Hidden Layers |
-| Sigmoid Output | Sigmoid Output |
-| Binary Cross Entropy | Binary Cross Entropy |
-| Gradient Descent | Backpropagation + Gradient Descent |
-| Maximizes Likelihood | Maximizes Likelihood |
+| Feature | Logistic Regression | Binary Neural Network |
+|---|---|---|
+| Architecture | No Hidden Layers | One or More Hidden Layers |
+| Output Activation | Sigmoid | Sigmoid |
+| Loss Function | Binary Cross Entropy | Binary Cross Entropy |
+| Optimization | Gradient Descent | Backpropagation + Gradient Descent |
+| Objective | Maximum Likelihood | Maximum Likelihood |
 
-Both optimize **exactly the same probabilistic objective**.
+Both optimize the same probabilistic objective.
 
 ---
 
-# Summary
+## Summary
 
 Binary Cross Entropy (BCE) is **not a new loss function introduced in Deep Learning**.
 
 It is the **Negative Log Likelihood (NLL)** obtained from **Maximum Likelihood Estimation (MLE)** in Logistic Regression.
 
-During Logistic Regression,
+During Logistic Regression, the BCE formula is derived using Probability Theory.
 
-the BCE formula is derived from probability theory.
+During Deep Learning, this derivation is already established.
 
-During Deep Learning,
+Therefore, Deep Learning frameworks directly use the BCE formula without separately recomputing the Likelihood Function during every training iteration.
 
-this derivation is assumed to be already known.
-
-Therefore,
-
-Deep Learning frameworks directly use the BCE formula without recomputing the Likelihood Function during every training iteration.
-
-Mathematically,
-
-using Binary Cross Entropy is **equivalent** to maximizing the likelihood of the observed data.
+Mathematically, minimizing Binary Cross Entropy is equivalent to maximizing the likelihood of the observed training data.
 
 ---
 
-# Key Takeaways
+## Key Takeaways
 
-✔ Binary Cross Entropy (BCE) is derived from Maximum Likelihood Estimation (MLE).
+- Binary Cross Entropy (BCE) is derived from Maximum Likelihood Estimation (MLE).
+- BCE is mathematically equivalent to Negative Log Likelihood (NLL).
+- Logistic Regression derives BCE using Probability Theory.
+- Deep Learning directly uses the final BCE formula.
+- The Likelihood Function is mathematically incorporated into BCE.
+- Deep Learning does not explicitly perform Likelihood → Log Likelihood → Negative Log Likelihood as separate optimization stages during every training iteration.
+- Minimizing BCE is mathematically equivalent to maximizing the likelihood of the observed data.
+- Logistic Regression can be viewed as a neural network with no hidden layers.
+- Binary Neural Networks and Logistic Regression optimize the same probabilistic objective.
+- The main architectural difference is that neural networks include hidden layers before the output layer.
 
-✔ BCE is mathematically equivalent to Negative Log Likelihood (NLL).
+---
 
-✔ Logistic Regression derives BCE using Probability Theory.
+## Next Topic
 
-✔ Deep Learning directly uses the final BCE formula.
+**Multi-class Classification – Softmax and Categorical Cross Entropy (CCE)**
 
-✔ The Likelihood Function is mathematically embedded inside BCE.
-
-✔ Deep Learning does **not** explicitly compute Likelihood → Log Likelihood → Negative Log during every training iteration.
-
-✔ Minimizing BCE is mathematically identical to maximizing the likelihood of the observed data.
-
-✔ Logistic Regression is a neural network with no hidden layers.
-
-✔ Binary Neural Networks and Logistic Regression optimize the same probabilistic objective.
-
-✔ The only major difference is that neural networks include hidden layers before the output layer.
+Continue exploring how probability-based loss functions extend from binary classification to multi-class classification.
