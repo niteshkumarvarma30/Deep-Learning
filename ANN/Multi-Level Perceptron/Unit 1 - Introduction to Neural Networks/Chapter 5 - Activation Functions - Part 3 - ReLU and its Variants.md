@@ -2,169 +2,292 @@
 
 # Chapter 5 – Activation Functions
 
-## Part 3 – ReLU and its Variants
+## Part 3 – ReLU and Its Variants
 
 ---
 
-# Learning Objectives
+## Learning Objectives
 
 After completing this chapter, you will be able to:
 
 - Understand the Rectified Linear Unit (ReLU) activation function.
 - Explain why ReLU is the default choice for hidden layers in modern deep learning.
-- Identify the mathematical definition and graph of ReLU.
-- Explore variants of ReLU such as Leaky ReLU, Parametric ReLU (PReLU), ELU, and SELU.
+- Understand the mathematical definition and graph of ReLU.
+- Explore variants of ReLU, such as Leaky ReLU, Parametric ReLU (PReLU), ELU, and SELU.
 
 ---
 
-# 1. Introduction
+## 1. Introduction
 
-As neural networks became deeper, the Vanishing Gradient problem caused by Sigmoid and Tanh made training almost impossible.
+As neural networks became deeper, the Vanishing Gradient problem caused by Sigmoid and Tanh made training increasingly difficult.
 
 Researchers needed an activation function that:
-1. Did not saturate in the positive direction (no flat curves for positive numbers).
-2. Was computationally cheap.
 
-This led to the adoption of **ReLU (Rectified Linear Unit)**, which is now the most widely used activation function in the world.
+1. Did not saturate in the positive direction (no flat curves for positive inputs).
+2. Was computationally inexpensive.
+
+This led to the adoption of **ReLU (Rectified Linear Unit)**, which is now one of the most widely used activation functions in deep learning.
 
 ---
 
-# 2. ReLU (Rectified Linear Unit)
+## 2. ReLU (Rectified Linear Unit)
 
-ReLU is incredibly simple. If the input is positive, it returns the input. If the input is negative, it returns zero.
+ReLU is a simple activation function:
 
-## Mathematical Equation
+- If the input is positive, it returns the input itself.
+- If the input is negative or zero, it returns zero.
+
+### Mathematical Equation
 
 $$
-
 f(z) = \max(0, z)
-
 $$
 
-## Graph
+### Derivative of ReLU
+
+The derivative of ReLU is:
+
+$$
+f'(z) =
+\begin{cases}
+1, & z > 0 \\
+0, & z < 0
+\end{cases}
+$$
+
+At $z = 0$, ReLU is not differentiable. In practice, deep learning frameworks define a subgradient at this point, commonly choosing zero.
+
+### Graph
 
 ```text
-       │      /
-       │    /
-       │  /
- 0.0 ──┼───────────
-       │
-      -∞      0       +∞
+       f(z)
+        |
+        |          /
+        |        /
+        |      /
+        |    /
+        |  /
+--------+---------------- z
+        0
 ```
 
-## Advantages of ReLU
+### Advantages of ReLU
 
-1. **No Vanishing Gradient (for positive $ z $):** In the positive region, the derivative is always exactly 1. It never flattens out, meaning gradients do not vanish.
-2. **Extremely Fast Computation:** There are no expensive exponential functions to calculate. It just involves a simple `if` condition or `max(0, z)` operation.
-3. **Sparse Activation:** Because all negative inputs are output as exactly 0, only a subset of neurons in the network is activated at any given time. This sparsity makes the network highly efficient and acts as a mild regularizer.
+1. **Reduced Vanishing Gradient Problem:** In the positive region, the derivative is exactly 1. Unlike Sigmoid and Tanh, ReLU does not saturate for positive inputs, allowing gradients to flow more effectively through deep networks.
 
-## Disadvantages of ReLU
+2. **Extremely Fast Computation:** ReLU does not require expensive exponential calculations. It involves a simple maximum operation:
 
-- **The Dying ReLU Problem:** This is its biggest flaw. If a large gradient updates a weight in such a way that the neuron always outputs a negative $ z $, the ReLU will output 0. Its gradient will also be 0. The neuron is essentially "dead" and will never update again.
+   ```python
+   output = max(0, z)
+   ```
 
-*(We will cover the Dying ReLU problem in detail in Part 4).*
+3. **Sparse Activation:** Negative inputs produce exactly zero. Therefore, only a subset of neurons is active for a given input. This sparsity can improve computational efficiency and act as a mild regularizer.
+
+### Disadvantages of ReLU
+
+- **The Dying ReLU Problem:** This is ReLU's biggest limitation. If weight updates cause a neuron to consistently receive negative inputs, it will always output zero. Its gradient will also be zero, preventing the neuron from updating its weights through that activation.
+
+  The neuron may become permanently inactive during training.
+
+*We will cover the Dying ReLU problem in detail in Part 4.*
 
 ---
 
-# 3. Variants of ReLU
+## 3. Variants of ReLU
 
-To fix the "Dying ReLU" problem, researchers developed several modified versions of ReLU.
+To address the limitations of standard ReLU, researchers developed several modified activation functions.
 
----
+### 3.1 Leaky ReLU
 
-## 3.1 Leaky ReLU
+Instead of making the output exactly zero for negative inputs, Leaky ReLU allows a small, non-zero gradient to pass through.
 
-Instead of making the output exactly zero for negative inputs, Leaky ReLU allows a very small, non-zero gradient to "leak" through.
-
-### Mathematical Equation
+#### Mathematical Equation
 
 $$
-
-f(z) = \begin{cases} z, & \text{if } z \ge 0 \\ 0.01z, & \text{if } z < 0 \end{cases}
-
+f(z) =
+\begin{cases}
+z, & z \geq 0 \\
+0.01z, & z < 0
+\end{cases}
 $$
 
-### How it solves Dying ReLU
-Because the slope for negative values is `0.01` instead of `0`, the gradient is never exactly zero. This allows "dead" neurons a chance to recover and start learning again.
+#### How Does It Address the Dying ReLU Problem?
+
+In standard ReLU, the gradient for negative inputs is zero.
+
+In Leaky ReLU, the slope for negative inputs is `0.01` instead of `0`.
+
+This allows gradients to flow even when the input is negative, giving inactive neurons an opportunity to recover and continue learning.
 
 ---
 
-## 3.2 Parametric ReLU (PReLU)
+### 3.2 Parametric ReLU (PReLU)
 
-In Leaky ReLU, the slope for negative values is fixed at `0.01`. In PReLU, this slope becomes a learnable parameter.
+In Leaky ReLU, the slope for negative inputs is fixed at `0.01`.
 
-### Mathematical Equation
+In Parametric ReLU (PReLU), this slope becomes a learnable parameter.
+
+#### Mathematical Equation
 
 $$
-
-f(z) = \begin{cases} z, & \text{if } z \ge 0 \\ \alpha z, & \text{if } z < 0 \end{cases}
-
+f(z) =
+\begin{cases}
+z, & z \geq 0 \\
+\alpha z, & z < 0
+\end{cases}
 $$
 
-Here, $ \alpha $ (alpha) is not a fixed number. The neural network learns the best value for $ \alpha $ during Backpropagation via Gradient Descent.
+Here, $\alpha$ (alpha) is a learnable parameter rather than a fixed constant.
+
+The neural network learns the appropriate value of $\alpha$ during training through Backpropagation and Gradient Descent.
+
+#### Key Difference Between Leaky ReLU and PReLU
+
+| Feature | Leaky ReLU | PReLU |
+|---|---|---|
+| Negative slope | Fixed (e.g., 0.01) | Learnable parameter |
+| Parameter learning | No | Yes |
+| Flexibility | Lower | Higher |
+| Main purpose | Allow negative gradient flow | Learn the optimal negative slope |
 
 ---
 
-## 3.3 Exponential Linear Unit (ELU)
+### 3.3 Exponential Linear Unit (ELU)
 
-ELU modifies the negative part of the curve to be a smooth exponential curve instead of a straight line. This makes the function closer to zero-centered and smoother than Leaky ReLU.
+ELU modifies the negative part of the activation curve using an exponential function instead of a straight line.
 
-### Mathematical Equation
+This allows negative inputs to produce smooth, negative outputs that approach a finite value.
+
+#### Mathematical Equation
 
 $$
-
-f(z) = \begin{cases} z, & \text{if } z \ge 0 \\ \alpha(e^z - 1), & \text{if } z < 0 \end{cases}
-
+f(z) =
+\begin{cases}
+z, & z \geq 0 \\
+\alpha(e^z - 1), & z < 0
+\end{cases}
 $$
 
-### Advantages
-- Smooth curve (differentiable everywhere, unlike ReLU which has a sharp corner at z=0).
-- Faster convergence than ReLU in some deep networks.
+Here, $\alpha$ controls the saturation value for negative inputs.
 
-### Disadvantages
-- Computationally expensive due to the exponential function $ e^z $.
+#### Advantages
 
----
+- **Smooth Curve:** ELU is differentiable everywhere, unlike standard ReLU, which has a sharp corner at $z = 0$.
+- **Negative Outputs:** It allows negative values, which can help keep activations closer to zero-centered.
+- **Potentially Faster Convergence:** ELU can converge faster than ReLU in some deep neural network architectures.
 
-## 3.4 Scaled Exponential Linear Unit (SELU)
+#### Disadvantages
 
-SELU is an advanced variant of ELU. When used with a specific type of weight initialization (LeCun Normal initialization), SELU has a magical property: it induces **self-normalizing** neural networks.
-
-This means that the output of every hidden layer automatically maintains a mean of 0 and a variance of 1, eliminating the need for Batch Normalization.
+- **Computationally Expensive:** ELU requires an exponential calculation for negative inputs, making it more computationally expensive than ReLU.
 
 ---
 
-# Interview Questions
+### 3.4 Scaled Exponential Linear Unit (SELU)
 
-## Q1. Why is ReLU preferred over Sigmoid in deep neural networks?
+SELU is an advanced variant of ELU designed to support self-normalizing neural networks.
 
-**Answer**
+When used with an appropriate network architecture and specific weight initialization, such as **LeCun Normal initialization**, SELU can help maintain the mean and variance of activations across layers.
 
-ReLU is preferred because it solves the Vanishing Gradient problem for positive inputs (its derivative is always 1) and is extremely computationally efficient (no exponential operations). This allows deep networks to train much faster and more reliably.
+The goal is to maintain:
 
----
+$$
+\mu \approx 0
+$$
 
-## Q2. What is Leaky ReLU, and why was it introduced?
+$$
+\sigma^2 \approx 1
+$$
 
-**Answer**
+This property is known as **self-normalization**.
 
-Leaky ReLU is a variant of ReLU that returns a very small gradient (e.g., 0.01z) for negative inputs instead of returning 0. It was introduced to solve the Dying ReLU problem, ensuring that neurons receiving negative inputs can still update their weights and recover.
-
----
-
-# Summary
-
-ReLU revolutionized Deep Learning by providing a fast, non-saturating activation function that mitigated the Vanishing Gradient problem. While its main flaw is the Dying ReLU problem, simple variants like Leaky ReLU and PReLU successfully address it by allowing a small gradient flow for negative inputs.
+It can reduce the need for Batch Normalization in suitable network architectures.
 
 ---
 
-# Key Takeaways
+## 4. Comparison of ReLU Variants
 
-✔ ReLU is defined as $ \max(0, z) $.
-✔ ReLU is the default choice for hidden layers.
-✔ It is computationally cheap and induces sparse activations.
-✔ Leaky ReLU prevents the Dying ReLU problem by allowing a small negative slope.
-✔ PReLU allows the network to learn the negative slope dynamically.
+| Activation Function | Positive Input | Negative Input | Main Characteristic |
+|---|---|---|---|
+| ReLU | $z$ | $0$ | Simple and computationally efficient |
+| Leaky ReLU | $z$ | $0.01z$ | Allows a small negative gradient |
+| PReLU | $z$ | $\alpha z$ | Learns the negative slope |
+| ELU | $z$ | $\alpha(e^z - 1)$ | Smooth negative exponential curve |
+| SELU | Scaled $z$ | Scaled ELU | Supports self-normalizing networks |
+
+---
+
+## 5. Interview Questions
+
+### Q1. Why is ReLU preferred over Sigmoid in deep neural networks?
+
+**Answer:**
+
+ReLU is preferred because it reduces the Vanishing Gradient problem for positive inputs. Its derivative is exactly 1 in the positive region, allowing gradients to flow more effectively through deep networks.
+
+It is also computationally efficient because it does not require exponential operations like Sigmoid.
+
+These properties often make deep networks faster and easier to train.
+
+### Q2. What is Leaky ReLU, and why was it introduced?
+
+**Answer:**
+
+Leaky ReLU is a variant of ReLU that allows a small, non-zero output for negative inputs instead of returning zero.
+
+For example:
+
+$$
+f(z) =
+\begin{cases}
+z, & z \geq 0 \\
+0.01z, & z < 0
+\end{cases}
+$$
+
+It was introduced to address the Dying ReLU problem by allowing gradients to flow even when the input is negative.
+
+### Q3. What is the difference between Leaky ReLU and PReLU?
+
+**Answer:**
+
+The main difference is how they handle the negative slope.
+
+- **Leaky ReLU:** Uses a fixed negative slope, such as `0.01`.
+- **PReLU:** Uses a learnable negative slope that the network updates during training.
+
+### Q4. What is the main advantage of SELU?
+
+**Answer:**
+
+SELU supports self-normalizing neural networks. Under suitable conditions, it helps maintain the mean and variance of activations across layers, potentially reducing the need for Batch Normalization.
+
+---
+
+## 6. Summary
+
+ReLU revolutionized deep learning by providing a computationally efficient, non-saturating activation function for positive inputs.
+
+Its main limitation is the Dying ReLU problem, where neurons can become permanently inactive because their gradients become zero.
+
+Several variants were developed to address this limitation:
+
+- **Leaky ReLU:** Allows a small negative slope.
+- **PReLU:** Learns the negative slope during training.
+- **ELU:** Uses an exponential function for negative inputs.
+- **SELU:** Supports self-normalizing neural networks under suitable conditions.
+
+---
+
+## 7. Key Takeaways
+
+- ReLU is defined as $f(z) = \max(0, z)$.
+- ReLU is a common default choice for hidden layers in deep neural networks.
+- It is computationally inexpensive and produces sparse activations.
+- ReLU has a zero gradient for negative inputs, which can cause the Dying ReLU problem.
+- Leaky ReLU addresses this issue by allowing a small negative slope.
+- PReLU makes the negative slope a learnable parameter.
+- ELU uses an exponential function for negative inputs.
+- SELU supports self-normalizing neural networks under appropriate conditions.
 
 ---
 
@@ -172,4 +295,4 @@ ReLU revolutionized Deep Learning by providing a fast, non-saturating activation
 
 **Part 4 – The Dying ReLU Problem**
 
-In the next part, we will take a deep dive into the Dying ReLU problem, understanding exactly why it happens and how it affects the training of a neural network.
+In the next part, we will take a deeper look at the Dying ReLU problem, understand exactly why it happens, and explore how it affects the training of neural networks.
