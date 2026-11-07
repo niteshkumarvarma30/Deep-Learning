@@ -81,9 +81,7 @@ Tanh is mathematically a shifted and stretched version of the Sigmoid function. 
 ## Mathematical Equation
 
 $$
-
-\tanh(z) = \frac{e^{z} - e^{-z}}{e^{z} + e^{-z}}
-
+\tanh(z) = \frac{e^z - e^{-z}}{e^z + e^{-z}}
 $$
 
 ## Graph
